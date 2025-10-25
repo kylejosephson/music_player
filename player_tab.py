@@ -67,7 +67,7 @@ class PlayerTab(QWidget):
             self.playlist.setCurrentRow(index)
 
     def play_pause(self):
-        if self.engine.is_playing():
+        if self.engine.is_actively_playing():
             self.engine.pause()
         else:
             if self.current_index == -1 and self.songs:
@@ -86,5 +86,6 @@ class PlayerTab(QWidget):
             self.play_song(prev_index)
 
     def check_song_end(self):
-        if not self.engine.is_playing() and self.current_index != -1:
+        # Only go to next song if the current one finished naturally
+        if not self.engine.is_actively_playing() and not self.engine.is_paused() and self.current_index != -1:
             self.play_next()
