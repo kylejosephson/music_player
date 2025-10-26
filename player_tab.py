@@ -1,168 +1,199 @@
-# player_tab.py
 import os
 import pygame
+from mutagen.mp3 import MP3
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QPushButton, QListWidget,
-    QHBoxLayout, QFileDialog, QLabel, QProgressBar
+    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QLabel, QProgressBar, QFileDialog
 )
 from PyQt5.QtCore import QTimer, Qt, QEvent, QTime
-from playback_engine import PlaybackEngine
+from PyQt5.QtGui import QFont
 
 
 class PlayerTab(QWidget):
     def __init__(self):
         super().__init__()
-        self.engine = PlaybackEngine()
-        self.songs = []
-        self.current_index = -1
-        self.total_length = 0
-        self.seek_offset = 0
-        self.last_pos = 0.0
-        self.last_update_time = QTime.currentTime()
+        pygame.mixer.init()
 
-        layout = QVBoxLayout(self)
-        self.setLayout(layout)
+        # --- Main Layout ---
+        self.layout = QHBoxLayout(self)
 
-        # Title
-        self.title_label = QLabel("No song playing")
-        layout.addWidget(self.title_label)
+        # ---------------- LEFT: PLAYER AREA ----------------
+        self.player_layout = QVBoxLayout()
+        self.player_layout.setAlignment(Qt.AlignTop)
 
-        # Add Songs
-        self.add_button = QPushButton("Add Songs")
-        self.add_button.clicked.connect(self.add_songs)
-        layout.addWidget(self.add_button)
+        # Song Title Label
+        self.song_label = QLabel("No song playing")
+        self.song_label.setFont(QFont("Arial", 14, QFont.Bold))
+        self.song_label.setAlignment(Qt.AlignCenter)
+        self.player_layout.addWidget(self.song_label)
 
-        # Playlist
-        self.playlist = QListWidget()
-        self.playlist.itemDoubleClicked.connect(self.play_selected)
-        layout.addWidget(self.playlist)
+        # Play/Pause Button
+        self.play_button = QPushButton("Play / Pause")
+        self.play_button.setFixedHeight(40)
+        self.play_button.clicked.connect(self.play_pause)
+        self.player_layout.addWidget(self.play_button, alignment=Qt.AlignCenter)
 
-        # Progress bar
+        # Progress Bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setTextVisible(False)
-        self.progress_bar.setFixedHeight(10)
+        self.progress_bar.setValue(0)
+        self.progress_bar.setFixedHeight(15)
         self.progress_bar.setStyleSheet("""
             QProgressBar {
-                background-color: #202020;
-                border: 1px solid #404040;
-                border-radius: 5px;
+                background-color: #1e1e1e;
+                border-radius: 8px;
+                border: 1px solid #333;
             }
             QProgressBar::chunk {
-                background-color: #00ff99;
-                border-radius: 5px;
+                background-color: #39ff14;
+                border-radius: 8px;
             }
         """)
-        self.progress_bar.installEventFilter(self)
-        layout.addWidget(self.progress_bar)
+        self.player_layout.addWidget(self.progress_bar)
 
-        # Time label
+        # Time Label (e.g., 1:38 / 3:09)
         self.time_label = QLabel("0:00 / 0:00")
-        self.time_label.setAlignment(Qt.AlignRight)
-        layout.addWidget(self.time_label)
+        self.time_label.setFont(QFont("Consolas", 10))
+        self.time_label.setAlignment(Qt.AlignCenter)
+        self.player_layout.addWidget(self.time_label)
 
-        # Controls
-        controls = QHBoxLayout()
-        self.play_pause_button = QPushButton("Play/Pause")
-        self.play_pause_button.clicked.connect(self.play_pause)
-        controls.addWidget(self.play_pause_button)
+        self.layout.addLayout(self.player_layout, stretch=3)
 
+        # ---------------- RIGHT: QUEUE AREA ----------------
+        self.queue_layout = QVBoxLayout()
+        self.queue_layout.setAlignment(Qt.AlignTop)
+
+        # Add Songs Button
+        self.add_button = QPushButton("Add Songs")
+        self.add_button.clicked.connect(self.add_songs)
+        self.queue_layout.addWidget(self.add_button)
+
+        # Queue List
+        self.queue_list = QListWidget()
+        self.queue_list.itemDoubleClicked.connect(self.play_selected_song)
+        self.queue_layout.addWidget(self.queue_list)
+
+        # Previous / Next Buttons
+        controls_layout = QHBoxLayout()
         self.prev_button = QPushButton("Previous")
         self.prev_button.clicked.connect(self.play_previous)
-        controls.addWidget(self.prev_button)
+        controls_layout.addWidget(self.prev_button)
 
         self.next_button = QPushButton("Next")
         self.next_button.clicked.connect(self.play_next)
-        controls.addWidget(self.next_button)
-        layout.addLayout(controls)
+        controls_layout.addWidget(self.next_button)
 
-        # Timer (runs fast for smooth progress)
+        self.queue_layout.addLayout(controls_layout)
+        self.layout.addLayout(self.queue_layout, stretch=2)
+
+        # --- Internal State ---
+        self.queue = []
+        self.current_index = -1
+        self.is_paused = False
+        self.total_length = 0
+        self.last_pos = 0.0
+        self.seek_offset = 0.0
+        self.last_update_time = QTime.currentTime()
+
+        # --- Timer for progress ---
         self.timer = QTimer()
-        self.timer.setInterval(50)  # 20 FPS
+        self.timer.setInterval(100)  # smoother updates
         self.timer.timeout.connect(self.update_progress)
         self.timer.start()
 
-    # --- Core Functions ---
-    def add_songs(self):
-        files, _ = QFileDialog.getOpenFileNames(self, "Select MP3 files", "", "Music Files (*.mp3)")
-        for file in files:
-            if file not in self.songs:
-                self.songs.append(file)
-                self.playlist.addItem(os.path.basename(file))
+        self.progress_bar.installEventFilter(self)
 
-    def play_selected(self, item):
-        index = self.playlist.row(item)
+    # -------------------------------------------------------------
+    #                      QUEUE MANAGEMENT
+    # -------------------------------------------------------------
+    def add_songs(self):
+        files, _ = QFileDialog.getOpenFileNames(self, "Select MP3 Files", "", "Music Files (*.mp3)")
+        for file in files:
+            if file not in self.queue:
+                self.queue.append(file)
+                self.queue_list.addItem(os.path.basename(file))
+
+    def add_song_to_queue(self, path: str):
+        if path and path not in self.queue:
+            self.queue.append(path)
+            self.queue_list.addItem(os.path.basename(path))
+
+    # -------------------------------------------------------------
+    #                      PLAYBACK CONTROL
+    # -------------------------------------------------------------
+    def play_selected_song(self, item):
+        index = self.queue_list.row(item)
         self.play_song(index)
 
     def play_song(self, index):
-        if 0 <= index < len(self.songs):
+        if 0 <= index < len(self.queue):
+            song_path = self.queue[index]
+            pygame.mixer.music.load(song_path)
+            pygame.mixer.music.play()
             self.current_index = index
-            filepath = self.songs[index]
-            self.engine.load(filepath)
-            self.engine.play()
-            self.title_label.setText(f"Now Playing: {os.path.basename(filepath)}")
-            self.playlist.setCurrentRow(index)
-            self.seek_offset = 0
-            self.last_pos = 0.0
-            self.last_update_time = QTime.currentTime()
+            self.is_paused = False
 
-            try:
-                self.total_length = pygame.mixer.Sound(filepath).get_length()
-            except Exception:
-                self.total_length = 0
-
+            # Update UI
+            self.song_label.setText(os.path.basename(song_path))
             self.progress_bar.setValue(0)
+            self.last_update_time = QTime.currentTime()
+            self.last_pos = 0.0
+            self.seek_offset = 0.0
+
+            # Get song length
+            audio = MP3(song_path)
+            self.total_length = audio.info.length
             self.time_label.setText(f"0:00 / {self.format_time(self.total_length)}")
 
     def play_pause(self):
-        if self.engine.is_actively_playing():
-            self.engine.pause()
+        if not self.queue:
+            return
+        if self.is_paused:
+            pygame.mixer.music.unpause()
+            self.is_paused = False
+            self.last_update_time = QTime.currentTime()
+        elif pygame.mixer.music.get_busy():
+            pygame.mixer.music.pause()
+            self.is_paused = True
         else:
-            if self.current_index == -1 and self.songs:
-                self.play_song(0)
-            else:
-                self.engine.play()
-                # resume smoothly
-                self.last_update_time = QTime.currentTime()
-                self.last_pos = self.engine.get_pos() + self.seek_offset
+            self.play_song(0)
 
     def play_next(self):
-        if self.songs:
-            next_index = (self.current_index + 1) % len(self.songs)
+        if self.queue:
+            next_index = (self.current_index + 1) % len(self.queue)
             self.play_song(next_index)
 
     def play_previous(self):
-        if self.songs:
-            prev_index = (self.current_index - 1) % len(self.songs)
+        if self.queue:
+            prev_index = (self.current_index - 1) % len(self.queue)
             self.play_song(prev_index)
 
-    # --- Progress & Smoothness ---
+    # -------------------------------------------------------------
+    #                      PROGRESS & SEEK
+    # -------------------------------------------------------------
     def update_progress(self):
-        if self.engine.current_song and not self.engine.is_paused():
-            raw_pos = self.engine.get_pos() + self.seek_offset
-            elapsed_ms = self.last_update_time.msecsTo(QTime.currentTime())
-            self.last_update_time = QTime.currentTime()
+        if self.total_length <= 0:
+            return
 
-            # smooth position interpolation (blend real with predicted)
-            predicted_pos = self.last_pos + (elapsed_ms / 1000.0)
-            smoothed_pos = (0.8 * predicted_pos) + (0.2 * raw_pos)
-            smoothed_pos = max(0, min(smoothed_pos, self.total_length))
+        # elapsed time interpolation for smooth updates
+        pos_ms = pygame.mixer.music.get_pos()
+        elapsed_ms = self.last_update_time.msecsTo(QTime.currentTime())
+        self.last_update_time = QTime.currentTime()
 
-            self.last_pos = smoothed_pos
+        raw_pos = (pos_ms / 1000.0) + self.seek_offset
+        predicted_pos = self.last_pos + (elapsed_ms / 1000.0)
+        smoothed_pos = (0.8 * predicted_pos) + (0.2 * raw_pos)
+        smoothed_pos = max(0, min(smoothed_pos, self.total_length))
+        self.last_pos = smoothed_pos
 
-            if self.total_length > 0:
-                progress = int((smoothed_pos / self.total_length) * 100)
-                self.progress_bar.setValue(min(progress, 100))
-                self.time_label.setText(
-                    f"{self.format_time(smoothed_pos)} / {self.format_time(self.total_length)}"
-                )
+        progress = int((smoothed_pos / self.total_length) * 100)
+        self.progress_bar.setValue(min(progress, 100))
+        self.time_label.setText(
+            f"{self.format_time(smoothed_pos)} / {self.format_time(self.total_length)}"
+        )
 
-            # end-of-song detection
-            if (
-                not self.engine.is_actively_playing()
-                and not self.engine.is_paused()
-                and self.current_index != -1
-            ):
-                self.play_next()
+        # end-of-song detection
+        if not pygame.mixer.music.get_busy() and not self.is_paused:
+            self.play_next()
 
     def eventFilter(self, source, event):
         if source == self.progress_bar and event.type() == QEvent.MouseButtonPress:
@@ -171,8 +202,7 @@ class PlayerTab(QWidget):
                 new_time = ratio * self.total_length
                 pygame.mixer.music.play(start=new_time)
                 self.seek_offset = new_time
-                self.engine.paused = False
-                self.engine.playing = True
+                self.is_paused = False
                 self.last_update_time = QTime.currentTime()
                 self.last_pos = new_time
                 self.progress_bar.setValue(int(ratio * 100))
@@ -182,9 +212,7 @@ class PlayerTab(QWidget):
                 return True
         return super().eventFilter(source, event)
 
-    # --- Helpers ---
-    @staticmethod
-    def format_time(seconds):
+    def format_time(self, seconds):
         minutes = int(seconds // 60)
-        secs = int(seconds % 60)
-        return f"{minutes}:{secs:02d}"
+        seconds = int(seconds % 60)
+        return f"{minutes}:{seconds:02d}"
