@@ -1,13 +1,85 @@
 {
+    "3 Doors Down": {
+        "Unknown Album": [
+            "3 Doors Down-Here Without You.mp3"
+        ]
+    },
+    "38 Special": {
+        "Flashback": [
+            "01 38 Special - Back To Paradise.mp3",
+            "02 38 Special - Hold On Loosely.mp3",
+            "03 38 Special - Wild-Eyed Southern Boys [Live].mp3",
+            "04 38 Special - If I'd Been The One.mp3",
+            "05 38 Special - Caught Up In You.mp3",
+            "06 38 Special - Fantasy Girl.mp3",
+            "07 38 Special - Rough-Housin' [Live].mp3",
+            "08 38 Special - Same Old Feeling.mp3",
+            "09 38 Special - Back Where You Belong.mp3",
+            "10 38 Special - Stone Cold Believer [Live].mp3",
+            "11 38 Special - Teacher Teacher.mp3",
+            "12 38 Special - Like No Other Night.mp3",
+            "13 38 Special - Twentieth Century Fox [Live].mp3",
+            "14 38 Special - Rockin' Into The Night.mp3"
+        ]
+    },
     "A-Ha": {
         "Hunting High And Low": [
             "01 - Take On Me.mp3",
             "06 - The Sun Always Shines On T.V..mp3"
         ]
     },
+    "Addison Road": {
+        "Unknown Album": [
+            "04 - Hope Now.mp3"
+        ]
+    },
+    "Air Supply": {
+        "Ultimate Air Supply": [
+            "01 Air Supply - Lost In Love.mp3",
+            "02 Air Supply - All Out Of Love.mp3",
+            "03 Air Supply - Chances.mp3",
+            "04 Air Supply - Every Woman In The World.mp3",
+            "05 Air Supply - The One That You Love.mp3",
+            "06 Air Supply - I Want To Give It All.mp3",
+            "07 Air Supply - Here I Am (Just When I Thought I Was Over You).mp3",
+            "08 Air Supply - Sweet Dreams.mp3",
+            "09 Air Supply - Even The Nights Are Better.mp3",
+            "10 Air Supply - Two Less Lonely People In The World.mp3",
+            "11 Air Supply - Don't Be Afraid.mp3",
+            "12 Air Supply - Young Love.mp3",
+            "13 Air Supply - Making Love Out Of Nothing At All.mp3",
+            "14 Air Supply - Just As I Am.mp3",
+            "15 Air Supply - The Power Of Love (You Are My Lady).mp3",
+            "16 Air Supply - Without You.mp3",
+            "17 Air Supply - Goodbye.mp3",
+            "18 Air Supply - Someone.mp3"
+        ]
+    },
+    "Alabama": {
+        "Unknown Album": [
+            "Alabama-love in the first degree.mp3",
+            "Alabama-mountain music.mp3"
+        ]
+    },
+    "Alan Jackson": {
+        "Unknown Album": [
+            "Alan Jackson-Little Bitty.mp3",
+            "Alan Jackson-Remember When.mp3"
+        ]
+    },
     "Alien Ant Farm": {
         "Smooth Criminal": [
             "01 - Smooth Criminal.mp3"
+        ]
+    },
+    "Alison Krauss": {
+        "Unknown Album": [
+            "Alison Krauss-When You Say Nothing at All.mp3"
+        ]
+    },
+    "Audrey Assad": {
+        "Unknown Album": [
+            "01 - For Love Of You.mp3"
         ]
     },
     "Avril Lavigne": {
@@ -16,19 +88,1596 @@
             "Avril Lavigne-When You're Gone.mp3"
         ]
     },
+    "Belinda Carlisle": {
+        "Unknown Album": [
+            "Belinda Carlisle - Mad About You.mp3",
+            "Belinda Carlisle-Heaven Is a Place on Earth.mp3",
+            "Belinda Carlisle-Mad About You.mp3"
+        ]
+    },
+    "Big & Rich": {
+        "Look at You": [
+            "01-01- Look at You.mp3"
+        ]
+    },
+    "Blake Shelton": {
+        "Unknown Album": [
+            "Blake Shelton-The Dreamer.mp3"
+        ]
+    },
+    "Bonnie Tyler": {
+        "Super Hits": [
+            "01 - Total Eclipse of the Heart.mp3",
+            "10 - Holding Out for a Hero (From _Footloose_ Soundtrack).mp3"
+        ]
+    },
     "Boston": {
         "Boston": [
-            "01 Boston - More Than a Feeling.mp3"
+            "01 Boston - More Than a Feeling.mp3",
+            "02 Boston - Peace of Mind.mp3",
+            "03 Boston - Foreplay, Long Time.mp3",
+            "04 Boston - Rock & Roll Band.mp3",
+            "05 Boston - Smokin'.mp3",
+            "06 Boston - Hitch a Ride.mp3",
+            "07 Boston - Something About You.mp3",
+            "08 Boston - Let Me Take You Home Tonight.mp3"
+        ],
+        "Don't Look Back": [
+            "01 Boston - Don't Look Back.mp3",
+            "02 Boston - The Journey.mp3",
+            "03 Boston - It's Easy.mp3",
+            "04 Boston - A Man I'll Never Be.mp3",
+            "05 Boston - Feelin' Satisfied.mp3",
+            "06 Boston - Party.mp3",
+            "07 Boston - Used to Bad News.mp3",
+            "08 Boston - Don't Be Afraid.mp3"
+        ],
+        "Third Stage": [
+            "01 Boston - Amanda.mp3",
+            "02 Boston - We're Ready.mp3",
+            "03 Boston - The Launch.mp3",
+            "04 Boston - Cool the Engines.mp3",
+            "05 Boston - My Destination.mp3",
+            "06 Boston - A New World.mp3",
+            "07 Boston - To Be a Man.mp3",
+            "08 Boston - I Think I Like It.mp3",
+            "09 Boston - Can'tcha Say-Still In Love.mp3",
+            "10 Boston - Hollyann.mp3"
+        ],
+        "Walk On": [
+            "01 Boston - I Need Your Love.mp3",
+            "02 Boston - Surrender To Me.mp3",
+            "03 Boston - Livin' For You.mp3",
+            "04 Boston - Walk On Medley- Walkin' At Night.mp3",
+            "05 Boston - Walk On Medley- Walk On.mp3",
+            "06 Boston - Walk On Medley- Get Organ-ized.mp3",
+            "07 Boston - Walk On Medley- Walk On (Some More).mp3",
+            "08 Boston - What's Your Name.mp3",
+            "09 Boston - Magdalene.mp3",
+            "10 Boston - We Can Make It.mp3"
+        ]
+    },
+    "Boy Meets Girl": {
+        "Unknown Album": [
+            "Boy Meets Girl - Waiting For A Star To Fall.mp3"
+        ]
+    },
+    "Brad Paisley": {
+        "Unknown Album": [
+            "Brad Paisley-Mud on the Tires.mp3"
+        ]
+    },
+    "Brantley Gilbert": {
+        "Bottoms Up": [
+            "01-01- Bottoms Up.mp3"
+        ]
+    },
+    "Brett Raymond": {
+        "Primarily for Christmas": [
+            "01 (Prologue) Remember the Child.mp3",
+            "02 Here We Come a Carolin'.mp3",
+            "03 Jolly Old St. Nicholas.mp3",
+            "04 Stars Were Gleaming.mp3",
+            "05 We Wish You a Merry Christmas.mp3",
+            "06 Silver and Gold.mp3",
+            "07 Toyland.mp3",
+            "08 (Reprise) Remember the Child.mp3",
+            "09 Up on the Housetop.mp3",
+            "10 Christmas Time Is Here.mp3",
+            "11 A La Nanita Nana.mp3",
+            "12 Somewhere in My Memory.mp3",
+            "13 Away in a Manger.mp3",
+            "14 Remember the Child.mp3"
+        ]
+    },
+    "Bryan Adams": {
+        "So Far So Good": [
+            "01 Summer of \u201969.mp3",
+            "02 Straight From the Heart.mp3",
+            "03 It\u2019s Only Love.mp3",
+            "04 Can\u2019t Stop This Thing We Started.mp3",
+            "05 Do I Have to Say the Words .mp3",
+            "06 This Time.mp3",
+            "07 Run to You.mp3",
+            "08 Heaven.mp3",
+            "09 Cuts Like a Knife.mp3",
+            "10 (Everything I Do) I Do It for You.mp3",
+            "11 Somebody.mp3",
+            "12 Kids Wanna Rock.mp3",
+            "13 Heat of the Night.mp3",
+            "14 Please Forgive Me.mp3"
+        ]
+    },
+    "Buddy Jewel": {
+        "Unknown Album": [
+            "Buddy Jewell-Sweet Southern Comfort.mp3"
+        ]
+    },
+    "Bush": {
+        "Unknown Album": [
+            "07 - Machinehead.mp3"
+        ]
+    },
+    "C & C Music Factory": {
+        "Gonna Make You Sweat [Clean]": [
+            "01-01- Gonna Make You Sweat (Everybody Dance Now) [Clean].mp3"
+        ]
+    },
+    "Carrie Underwood": {
+        "Unknown Album": [
+            "Carrie Underwood-Inside Your Heaven.mp3"
+        ]
+    },
+    "Casting Crowns": {
+        "Casting Crowns": [
+            "03 - Voice Of Truth.mp3",
+            "04 - Who Am I.mp3"
+        ],
+        "Lifesong": [
+            "02 - Praise You In This Storm.mp3",
+            "03 - Does Anybody Hear Her.mp3"
+        ],
+        "The Alter and The Door": [
+            "04 - East To West.mp3"
+        ],
+        "The Very Next Thing": [
+            "03 - One Step Away.mp3"
+        ],
+        "Thrive": [
+            "03 - Just Be Held.mp3"
+        ],
+        "Until The Whole World Hears": [
+            "01 - Until The Whole World Hears.mp3",
+            "06 - Glorious Day (Living He Loved Me).mp3"
+        ]
+    },
+    "Celine Dion": {
+        "A New Day Has Come": [
+            "Celine Dion-New Day Has Come.mp3"
+        ],
+        "The Very Best of Celine Dion": [
+            "01 - The Power of Love (Radio Edit).mp3",
+            "02 - If You Asked Me To.mp3",
+            "03 - Because You Loved Me (Theme from _Up Close and Personal_).mp3",
+            "04 - It's All Coming Back to Me Now (Radio Version).mp3",
+            "05 - Love Can Move Mountains.mp3",
+            "06 - To Love You More (Radio Edit).mp3",
+            "07 - My Heart Will Go On (Love Theme from _Titanic_).mp3",
+            "08 - That's the Way It Is.mp3",
+            "09 - If Walls Could Talk.mp3",
+            "10 - The First Time Ever I Saw Your Face.mp3",
+            "11 - All the Way (Duet with Frank Sinatra).mp3",
+            "12 - Then You Look at Me.mp3",
+            "13 - I Want You to Need Me.mp3",
+            "14 - Live for the One I Love.mp3"
+        ]
+    },
+    "Chicago": {
+        "Greatest Hits 1982-1989": [
+            "01 Chicago - Hard To Say I'm Sorry-Get Away.mp3",
+            "02 Chicago - Look Away.mp3",
+            "03 Chicago - Stay The Night.mp3",
+            "04 Chicago - Will You Still Love Me.mp3",
+            "05 Chicago - Love Me Tomorrow.mp3",
+            "06 Chicago - What Kind Of Man Would I Be (Remix).mp3",
+            "07 Chicago - You're The Inspiration.mp3",
+            "08 Chicago - I Don't Wanna Live Without Your Love.mp3",
+            "09 Chicago - Hard Habit To Break.mp3",
+            "10 Chicago - Along Comes A Woman.mp3",
+            "11 Chicago - If She Would Have Been Faithful.mp3",
+            "12 Chicago - We Can Last Forever.mp3"
+        ]
+    },
+    "Chris Tomlin": {
+        "Unknown Album": [
+            "02 - Made To Worship (See The Morning Album Version).mp3",
+            "03 - I Lift My Hands.mp3",
+            "03 - Our God.mp3",
+            "05 - I Will Rise.mp3"
+        ],
+        "Arriving": [
+            "01 - Indescribable.mp3",
+            "02 - Holy Is The Lord.mp3",
+            "03 - How Great Is Our God.mp3",
+            "04 - Your Grace Is Enough (Arriving Album Version).mp3",
+            "05 - Unfailing Love.mp3",
+            "06 - The Way I Was Made.mp3",
+            "07 - Mighty Is The Power Of The Cross.mp3",
+            "08 - All Bow Down.mp3",
+            "09 - On Our Side.mp3",
+            "10 - King Of Glory.mp3",
+            "11 - You Do All Things Well.mp3"
+        ]
+    },
+    "Christy Nockels": {
+        "Unknown Album": [
+            "03 - Waiting Here For You.mp3"
+        ]
+    },
+    "Cutting Crew": {
+        "Unknown Album": [
+            "Cutting Crew - (I Just) Died In Your Arms.mp3",
+            "Cutting Crew-(I Just) Died In Your Arms.mp3"
+        ]
+    },
+    "Dan Fogelberg": {
+        "The Very Best Of Dan Fogelberg": [
+            "01 Dan Fogelberg - Nether Lands.mp3",
+            "02 Dan Fogelberg - Part Of The Plan.mp3",
+            "03 Dan Fogelberg - Heart Hotels.mp3",
+            "04 Dan Fogelberg - Longer.mp3",
+            "05 Dan Fogelberg - Hard To Say.mp3",
+            "06 Dan Fogelberg - Leader Of The Band.mp3",
+            "07 Dan Fogelberg - Same Old Lang Syne.mp3",
+            "08 Dan Fogelberg - Run For The Roses.mp3",
+            "09 Dan Fogelberg - Make Love Stay.mp3",
+            "10 Dan Fogelberg - Missing You.mp3",
+            "11 Dan Fogelberg - Language Of Love.mp3",
+            "12 Dan Fogelberg - Believe In Me.mp3",
+            "13 Dan Fogelberg - Lonely In Love.mp3",
+            "14 Dan Fogelberg - She Don't Look Back.mp3",
+            "15 Dan Fogelberg - Rhythm Of The Rain.mp3",
+            "16 Dan Fogelberg - Magic Every Moment.mp3",
+            "17 Dan Fogelberg - A Love Like This.mp3"
+        ]
+    },
+    "Daughtry": {
+        "Unknown Album": [
+            "DAUGHTRY-What About Now.mp3"
+        ]
+    },
+    "Dave Matthews Band": {
+        "Unknown Album": [
+            "Dave Matthews Band-Ants Marching.mp3"
+        ]
+    },
+    "David Crowder Band": {
+        "Remedy": [
+            "03 - Everything Glorious.mp3"
+        ]
+    },
+    "Eagles": {
+        "Unknown Album": [
+            "Eagles-Peaceful Easy Feeling.mp3"
+        ]
+    },
+    "Eric Church": {
+        "Chief": [
+            "09 - Springsteen.mp3"
+        ],
+        "Give Me Back My Hometown": [
+            "01-01- Give Me Back My Hometown.mp3"
+        ],
+        "The Outsiders": [
+            "01-01- The Outsiders.mp3"
+        ]
+    },
+    "Faith Hill": {
+        "Unknown Album": [
+            "Faith Hill-It Matters To Me.mp3",
+            "Faith Hill-You Give Me Love.mp3"
+        ],
+        "Faith": [
+            "01 Faith Hill - This Kiss.mp3",
+            "02 Faith Hill - You Give Me Love.mp3",
+            "03 Faith Hill - Let Me Let Go.mp3",
+            "04 Faith Hill - Love Ain't Like That.mp3",
+            "05 Faith Hill - Better Days.mp3",
+            "06 Faith Hill - My Wild Frontier.mp3",
+            "07 Faith Hill - The Secret Of Life.mp3",
+            "08 Faith Hill - Just To Hear You Say That You Love Me with Tim McGraw.mp3",
+            "09 Faith Hill - Me.mp3",
+            "10 Faith Hill - I Love You.mp3",
+            "11 Faith Hill - The Hard Way.mp3",
+            "12 Faith Hill - Somebody Stand By Me.mp3"
+        ],
+        "It Matters To Me": [
+            "01 Faith Hill - Someone Else's Dream.mp3",
+            "02 Faith Hill - Let's Go To Vegas.mp3",
+            "03 Faith Hill - It Matters To Me.mp3",
+            "04 Faith Hill - Bed of Roses.mp3",
+            "05 Faith Hill - A Man's Home Is His Castle.mp3",
+            "06 Faith Hill - You Can't Lose Me.mp3",
+            "07 Faith Hill - I Can't Do That Anymore.mp3",
+            "08 Faith Hill - A Room In My Heart.mp3",
+            "09 Faith Hill - You Will Be Mine.mp3",
+            "10 Faith Hill - Keep Walkin' On.mp3"
+        ]
+    },
+    "Fee": {
+        "Unknown Album": [
+            "05 - Everything Falls.mp3"
+        ]
+    },
+    "FFH": {
+        "Unknown Album": [
+            "01 - Undone.mp3",
+            "02 - One Of These Days.mp3"
+        ]
+    },
+    "Fleetwood Mac": {
+        "Greatest Hits": [
+            "01 - Rhiannon.mp3",
+            "02 - Don't Stop.mp3",
+            "03 - Go Your Own Way.mp3",
+            "04 - Hold Me.mp3",
+            "05 - Everywhere.mp3",
+            "06 - Gypsy.mp3",
+            "07 - You Make Loving Fun.mp3",
+            "08 - As Long as You Follow.mp3",
+            "09 - Dreams.mp3",
+            "10 - Say You Love Me.mp3",
+            "11 - Tusk.mp3",
+            "12 - Little Lies.mp3",
+            "13 - Sara.mp3",
+            "14 - Big Love.mp3",
+            "15 - Over My Head.mp3",
+            "16 - No Questions Asked.mp3"
+        ]
+    },
+    "Foreigner": {
+        "Unknown Album": [
+            "Foreigner - I Want To Know What Love Is.mp3"
+        ]
+    },
+    "Garth Brooks": {
+        "Unknown Album": [
+            "Garth Brooks-To Make You Feel My Love.mp3"
+        ],
+        "The Hits": [
+            "01 Garth Brooks - Ain't Going Down ( Til The Sun Comes Up ).mp3",
+            "02 Garth Brooks - Friends In Low Places.mp3",
+            "03 Garth Brooks - Callin' Baton Rouge.mp3",
+            "04 Garth Brooks - The River.mp3",
+            "05 Garth Brooks - Much Too Young ( To Feel This Damn Old ).mp3",
+            "06 Garth Brooks - The Thunder Rolls.mp3",
+            "07 Garth Brooks - American Honky-Tonk Bar Association.mp3",
+            "08 Garth Brooks - If Tomorrow Never Comes.mp3",
+            "09 Garth Brooks - Unanswered Prayers.mp3",
+            "10 Garth Brooks - Standing Outside The Fire.mp3",
+            "11 Garth Brooks - Rodeo.mp3",
+            "12 Garth Brooks - What She's Doing Now.mp3",
+            "13 Garth Brooks - We Shall Be Free.mp3",
+            "14 Garth Brooks - Papa Loved Mama.mp3",
+            "15 Garth Brooks - Shameless.mp3",
+            "16 Garth Brooks - Two Of A Kind, Workin' On A Full House.mp3",
+            "17 Garth Brooks - That Summer.mp3",
+            "18 Garth Brooks - The Dance.mp3"
+        ]
+    },
+    "George Micheals": {
+        "Unknown Album": [
+            "George Micheals - Never Gonna DAnce Again.mp3",
+            "George Micheals-Never Gonna DAnce Again.mp3"
+        ]
+    },
+    "George Strait": {
+        "George Straits Greatest Hits, Volume Two": [
+            "01-09- All My Exs Live In Texas.mp3"
+        ]
+    },
+    "George Thorogood & The Destroyers": {
+        "Bad To The Bone": [
+            "01-06- Bad To The Bone.mp3"
+        ]
+    },
+    "Godsmack": {
+        "Awake": [
+            "02 - Awake.mp3"
+        ]
+    },
+    "Heart": {
+        "Bad Animals": [
+            "01 - Who Will You Run To.mp3",
+            "02 - Alone.mp3"
+        ],
+        "Brigade": [
+            "01 - Wild Child.mp3",
+            "02 - All I Wanna Do Is Make Love To You.mp3",
+            "10 - Stranded.mp3"
+        ],
+        "Dog and Butterfly": [
+            "04 - Straight On.mp3",
+            "05 - Dog & Butterfly.mp3"
+        ],
+        "Dreamboat Annie": [
+            "01 - Magic Man.mp3",
+            "02 - Dreamboat Annie (Fantasy Child).mp3",
+            "03 - Crazy On You.mp3",
+            "04 - Soul Of The Sea.mp3",
+            "05 - Dreamboat Annie.mp3",
+            "06 - White Lightning And Wine.mp3",
+            "07 - (Love Me Like Music) I'll Be Your Song.mp3",
+            "08 - Sing Child.mp3",
+            "09 - How Deep It Goes.mp3",
+            "10 - Dreamboat Annie (Reprise).mp3"
+        ],
+        "Heart": [
+            "01 - If Looks Could Kill.mp3",
+            "02 - What About Love_.mp3",
+            "03 - Never.mp3",
+            "04 - These Dreams.mp3",
+            "05 - The Wolf.mp3",
+            "06 - All Eyes.mp3",
+            "07 - Nobody Home.mp3",
+            "08 - Nothin' At All.mp3",
+            "09 - What He Don't Know.mp3",
+            "10 - Shell Shock.mp3"
+        ]
+    },
+    "Iron Maiden": {
+        "Live After Death (1998 Remaster)": [
+            "(Disc 2) 01 - Wrathchild (Live at the Hammersmith Odeon) [1998 Remaster].mp3",
+            "(Disc 2) 02 - 22 Acacia Avenue (Live at the Hammersmith Odeon) [1998 Remaster].mp3",
+            "(Disc 2) 03 - Children of the Damned (Live at the Hammersmith Odeon) [1998 Remaster].mp3",
+            "(Disc 2) 04 - Die with Your Boots On (Live at the Hammersmith Odeon) [1998 Remaster].mp3",
+            "(Disc 2) 05 - Phantom of the Opera (Live at the Hammersmith Odeon) [1998 Remaster].mp3",
+            "01 - Intro (Churchill's Speech) [Live at Long Beach Arena] [1998 Remaster].mp3",
+            "02 - Aces High (Live Long Beach Arena) [1998 Remastered Version].mp3",
+            "03 - 2 Minutes to Midnight (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "04 - The Trooper (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "05 - Revelations (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "06 - Flight of Icarus (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "07 - Rime of the Ancient Mariner (Live at Long Beach Arena) [1998 Remaster] [Explicit].mp3",
+            "08 - Powerslave (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "09 - The Number of the Beast (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "10 - Hallowed Be Thy Name (Live at Long Beach Arena) [1998 Remaster].mp3",
+            "11 - Iron Maiden (Live at Long Beach Arena) [1998 Remaster] [Explicit].mp3",
+            "12 - Run to the Hills (Live at Long Beach Arena) [1998 Remaster] [Explicit].mp3",
+            "13 - Running Free (Live at Long Beach Arena) [1998 Remaster].mp3"
+        ],
+        "Somewhere In Time": [
+            "05 - The Loneliness Of The Long Distance Runner.mp3"
+        ]
+    },
+    "Jackson Browne": {
+        "The Very Best Of Jackson Browne": [
+            "(Disc 2) 02 - You Love the Thunder.mp3",
+            "(Disc 2) 03 - Boulevard.mp3",
+            "(Disc 2) 04 - Somebody's Baby.mp3",
+            "(Disc 2) 05 - Tender Is the Night.mp3",
+            "(Disc 2) 06 - Lawyers in Love.mp3",
+            "(Disc 2) 07 - In the Shape of a Heart (Live in 1996).mp3",
+            "(Disc 2) 08 - Lawless Avenues.mp3",
+            "(Disc 2) 09 - Lives in the Balance.mp3",
+            "(Disc 2) 10 - I Am a Patriot.mp3",
+            "(Disc 2) 11 - Sky Blue and Black.mp3",
+            "(Disc 2) 12 - I'm Alive.mp3",
+            "(Disc 2) 13 - The Barricades of Heaven.mp3",
+            "(Disc 2) 14 - Looking East.mp3",
+            "(Disc 2) 15 - The Naked Ride Home.mp3",
+            "(Disc 2) 16 - The Night Inside Me.mp3",
+            "01 - Doctor My Eyes.mp3",
+            "02 - Jamaica Say You Will.mp3",
+            "03 - Rock Me on the Water.mp3",
+            "04 - Take It Easy.mp3",
+            "05 - These Days.mp3",
+            "06 - Red Neck Friend.mp3",
+            "07 - For Everyman.mp3",
+            "08 - For a Dancer (Single Version).mp3",
+            "09 - Fountain of Sorrow.mp3",
+            "10 - Late for the Sky (1997 Remaster).mp3",
+            "11 - Before the Deluge.mp3",
+            "12 - Your Bright Baby Blues.mp3",
+            "13 - The Pretender.mp3",
+            "14 - Here Come Those Tears Again.mp3",
+            "15 - The Load Out.mp3",
+            "16 - Stay (Live).mp3"
+        ]
+    },
+    "Jeremy Camp": {
+        "Carried Me The Worship Project": [
+            "11 - Youre Worthy Of My Praise.mp3"
+        ],
+        "Restored": [
+            "02 - Take You Back.mp3"
+        ],
+        "Speaking Louder Than Before": [
+            "08 - Healing Hand Of God.mp3"
+        ]
+    },
+    "Jim Brickman": {
+        "Unknown Album": [
+            "05 Valentine.mp3"
+        ]
+    },
+    "Joan Jett & The Blackhearts": {
+        "Unknown Album": [
+            "01 - I Love Rock n' Roll.mp3"
+        ]
+    },
+    "Josh Wilson": {
+        "Life Is Not A Shapshot": [
+            "02 - Before The Morning.mp3"
+        ]
+    },
+    "Journey": {
+        "Greatest Hits Live": [
+            "01 Don\u2019t Stop Believin\u2019.mp3",
+            "02 Separate Ways (Worlds Apart).mp3",
+            "03 After the Fall.mp3",
+            "04 Lovin\u2019, Touchin\u2019, Squeezin\u2019.mp3",
+            "05 Faithfully.mp3",
+            "06 Who\u2019s Cryin\u2019 Now.mp3",
+            "07 Any Way You Want It.mp3",
+            "08 Lights.mp3",
+            "09 Stay Awhile.mp3",
+            "10 Open Arms.mp3",
+            "11 Send Her My Love.mp3",
+            "12 Still They Ride.mp3",
+            "13 Stone in Love.mp3",
+            "14 Escape.mp3",
+            "15 Line of Fire.mp3",
+            "16 Wheel in the Sky.mp3",
+            "17 (fireworks).mp3"
+        ]
+    },
+    "Katy Perry": {
+        "Unknown Album": [
+            "06 - Dark Horse [feat. Juicy J].mp3"
+        ],
+        "Roar": [
+            "01-01- Roar.mp3"
+        ]
+    },
+    "Keith Urban": {
+        "Unknown Album": [
+            "Keith Urban-Who Wouldn't Wanna Be Me.mp3"
+        ]
+    },
+    "Kenny Loggins": {
+        "Unknown Album": [
+            "Kenny Loggins -- Almost Paradise (duet From Footloose).mp3"
+        ]
+    },
+    "Kenny Rogers": {
+        "Unknown Album": [
+            "Kenny Rogers-Love Will Turn You Around.mp3"
+        ]
+    },
+    "Kutless": {
+        "Unknown Album": [
+            "04 - Sea Of Faces (Sea Of Faces Album Version).mp3",
+            "05 - What Faith Can Do.mp3",
+            "09 - Strong Tower.mp3"
+        ]
+    },
+    "L.A. Guns": {
+        "L.A. Guns": [
+            "03 - One More Reason.mp3"
+        ]
+    },
+    "Laura Story": {
+        "Blessings": [
+            "04 - What A Savior.mp3",
+            "05 - Blessings.mp3"
+        ],
+        "Great God Who Saves": [
+            "03 - Mighty To Save (Album Version).mp3"
+        ]
+    },
+    "Lee Greenwood": {
+        "God Bless The USA - Best Of America, Vol 3": [
+            "01-01- God Bless The USA - 2003.mp3"
+        ]
+    },
+    "Leeland": {
+        "Love Is On The Move": [
+            "02 - Follow You (with special guest Brandon Heath).mp3"
+        ]
+    },
+    "Level 42": {
+        "Unknown Album": [
+            "Level 42 - Something About You.mp3"
+        ]
+    },
+    "Lifehouse": {
+        "Unknown Album": [
+            "01 - All In.mp3"
+        ]
+    },
+    "Lincoln Brewster": {
+        "Unknown Album": [
+            "07 - The Power Of Your Name.mp3"
+        ]
+    },
+    "Listener's Choice": {
+        "An Old World Christmas": [
+            "01 The First Noel.mp3",
+            "02 It Came Upon a Midnight Clear.mp3",
+            "03 Here We Come A-Wassailing.mp3",
+            "04 I Wonder as I Wander.mp3",
+            "05 I Saw Three Ships.mp3",
+            "06 God Rest Ye Merry Gentlemen.mp3",
+            "07 Coventry Carol.mp3",
+            "08 O Little Town of Bethlehem.mp3",
+            "09 Good King Wenceslas.mp3",
+            "10 Away in a Manger.mp3",
+            "11 O Tannenbaum.mp3",
+            "12 Silent Night.mp3"
+        ]
+    },
+    "Lmfao": {
+        "Sorry For Party Rocking [Clean] [+digital booklet]": [
+            "01-03- Party Rock Anthem [feat GoonRock].mp3"
+        ]
+    },
+    "Mark Schultz": {
+        "Unknown Album": [
+            "10 - Love Has Come.mp3"
+        ]
+    },
+    "Martina McBride": {
+        "Unknown Album": [
+            "01 My Baby Loves Me.mp3"
+        ]
+    },
+    "Matt Brouwer": {
+        "Unknown Album": [
+            "07 - Sometimes.mp3"
+        ]
+    },
+    "Matt Redman": {
+        "You Never Let Go": [
+            "01 - You Never Let Go.mp3"
+        ]
+    },
+    "MercyMe": {
+        "Spoken For": [
+            "07 - Word Of God Speak.mp3"
+        ],
+        "Undone": [
+            "04 - In The Blink Of An Eye.mp3"
+        ]
+    },
+    "Meredith Andrews": {
+        "Unknown Album": [
+            "03 - Can Anybody Hear Me.mp3"
+        ]
+    },
+    "Metallica": {
+        "Kill Them All": [
+            "02 - The Four Horsemen (Remastered).mp3",
+            "09 - Seek & Destroy (Remastered).mp3"
+        ]
+    },
+    "Michael Jackson": {
+        "The Essential Michael Jackson": [
+            "02-09- Black Or White (Single Version).mp3"
+        ]
+    },
+    "Mikeschair": {
+        "Unknown Album": [
+            "04 - Someone Worth Dying For.mp3"
+        ]
+    },
+    "Mr. Mister": {
+        "Unknown Album": [
+            "Mr. Mister - Kyrie.mp3"
+        ]
+    },
+    "Museum": {
+        "Unknown Album": [
+            "04 - My Help Comes From The Lord.mp3"
+        ]
+    },
+    "Natalie Grant": {
+        "Unknown Album": [
+            "08 - Your Great Name.mp3"
+        ]
+    },
+    "Not Your Mothers LDS Music 3": {
+        "Unknown Album": [
+            "- My CD - 01 - This Day.mp3",
+            "- My CD - 02 - His Name Is Love.mp3",
+            "- My CD - 03 - Falling and Flying.mp3",
+            "- My CD - 04 - Faithful.mp3",
+            "- My CD - 05 - Closer.mp3",
+            "- My CD - 06 - The Second Greatest Thing.mp3",
+            "- My CD - 07 - Never Be Another.mp3",
+            "- My CD - 08 - You Make Us Want to Sing.mp3",
+            "- My CD - 09 - Where You Are.mp3",
+            "- My CD - 10 - Riddle.mp3",
+            "- My CD - 11 - A Mighty Change of Heart.mp3",
+            "- My CD - 12 - Holding On.mp3"
+        ]
+    },
+    "Paul Baloche": {
+        "Unknown Album": [
+            "10 - God Of Wonders (Album Version).mp3"
+        ]
+    },
+    "Pharrell Williams": {
+        "G I R L": [
+            "01-05- Happy (From Despicable Me 2).mp3"
+        ]
+    },
+    "Phil Wickham": {
+        "Unknown Album": [
+            "06 - Safe.mp3"
+        ]
+    },
+    "Phillips, Craig And Dean": {
+        "Unknown Album": [
+            "03 - You Are God Alone (Not A God).mp3"
+        ]
+    },
+    "Pink Floyd": {
+        "The Dark Side Of The Moon (50th Anniversary) [2023": [
+            "01 - Speak to Me (2023 Remaster) [Explicit].mp3",
+            "02 - Breathe (In the Air) (2023 Remaster).mp3",
+            "03 - On the Run (2023 Remaster).mp3",
+            "04 - Time (2023 Remaster).mp3",
+            "05 - The Great Gig in the Sky (2023 Remaster).mp3",
+            "06 - Money (2023 Remaster) [Explicit].mp3",
+            "07 - Us and Them (2023 Remaster).mp3",
+            "08 - Any Colour You Like (2023 Remaster).mp3",
+            "09 - Brain Damage (2023 Remaster).mp3",
+            "10 - Eclipse (2023 Remaster).mp3"
+        ]
+    },
+    "Plumb": {
+        "Unknown Album": [
+            "12 - Beautiful History.mp3"
+        ]
+    },
+    "Quiet Riot": {
+        "Metal Health": [
+            "01 - Metal Health (Bang Your Head).mp3",
+            "02 - Cum on Feel the Noize [Explicit].mp3"
+        ]
+    },
+    "R.E.M": {
+        "Unknown Album": [
+            "07 - Orange Crush.mp3"
+        ]
+    },
+    "Rainbow": {
+        "The Very Best Of Rainbow": [
+            "01 Rainbow - Man On The Silver Mountain.mp3",
+            "02 Rainbow - Catch The Rainbow.mp3",
+            "03 Rainbow - Starstruck.mp3",
+            "04 Rainbow - Stargazer.mp3",
+            "05 Rainbow - Kill The King.mp3",
+            "06 Rainbow - Long Live Rock 'N 'Roll.mp3",
+            "07 Rainbow - Gates Of Babylon.mp3",
+            "08 Rainbow - Since You Been Gone.mp3",
+            "09 Rainbow - All Night Long.mp3",
+            "10 Rainbow - I Surrender.mp3",
+            "11 Rainbow - Can't Happen Here.mp3",
+            "12 Rainbow - Jealous Lover.mp3",
+            "13 Rainbow - Stone Cold.mp3",
+            "14 Rainbow - Power.mp3",
+            "15 Rainbow - Can't Let You Go.mp3",
+            "16 Rainbow - Street Of Dreams.mp3"
+        ]
+    },
+    "Randy Houser": {
+        "How Country Feels": [
+            "01-12- Goodnight Kiss.mp3"
+        ]
+    },
+    "Rascal Flatts": {
+        "Unknown Album": [
+            "Rascal Flatts-Bless The Broken Road.mp3"
+        ]
+    },
+    "REO Speedwagon": {
+        "The Hits": [
+            "01 REO Speedwagon - I Don't Want to Lose You [new recording for 'The Hits', May 1998].mp3",
+            "02 REO Speedwagon - Here with Me [new recording for 'The Hits', May 1998].mp3",
+            "03 REO Speedwagon - Roll with the Changes [from 'You Can Tune a Piano, but You Can't Tuna Fish', March 1978].mp3",
+            "04 REO Speedwagon - Keep on Loving You [from 'Hi Infidelity', November 1980].mp3",
+            "05 REO Speedwagon - That Ain't Love [from 'Life as We Know It', February 1987].mp3",
+            "06 REO Speedwagon - Take It on the Run [from 'Hi Infidelity', November 1980].mp3",
+            "07 REO Speedwagon - In My Dreams [from 'Life as We Know It', February 1987].mp3",
+            "08 REO Speedwagon - Don't Let Him Go [from 'Hi Infidelity', November 1980].mp3",
+            "09 REO Speedwagon - Can't Fight This Feeling [from 'Wheels Are Turnin'', November 1984].mp3",
+            "10 REO Speedwagon - Keep Pushin' [from 'R.E.O.', June 1976].mp3",
+            "11 REO Speedwagon - Time for Me to Fly [from 'You Can Tune a Piano, but You Can't Tuna Fish', March 1978].mp3",
+            "12 REO Speedwagon - One Lonely Night [from 'Wheels Are Turnin'', November 1984].mp3",
+            "13 REO Speedwagon - Back on the Road Again [from 'Nine Lives', July 1979].mp3",
+            "14 REO Speedwagon - Ridin' the Storm Out [from 'Ridin' the Storm Out', December 1973].mp3"
+        ]
+    },
+    "Richard Marx": {
+        "Greatest Hits": [
+            "01 Richard Marx - Don't Mean Nothing.mp3",
+            "02 Richard Marx - Endless Summer Nights.mp3",
+            "03 Richard Marx - Now And Forever.mp3",
+            "04 Richard Marx - Should've Known Better.mp3",
+            "05 Richard Marx - Angelia.mp3",
+            "06 Richard Marx - Hold On To The Nights.mp3",
+            "07 Richard Marx - Angel's Lullaby.mp3",
+            "08 Richard Marx - Take This Heart.mp3",
+            "09 Richard Marx - Satisfied.mp3",
+            "10 Richard Marx - Until I Find You Again.mp3",
+            "11 Richard Marx - Hazard.mp3",
+            "12 Richard Marx - The Way She Loves Me.mp3",
+            "13 Richard Marx - Keep Coming Back.mp3",
+            "14 Richard Marx - Children Of The Night.mp3",
+            "15 Richard Marx - Touch Of Heaven.mp3",
+            "16 Richard Marx - Right Here Waiting.mp3"
         ]
     },
     "Rush": {
+        "2112": [
+            "01 Rush - '2112' (I. Overture, II. The Temples Of Syrinx, III. Discovery, IV. Presentation, V. Oracle- The Dream, VI. Soliloquy, VII. Grand Finale).mp3",
+            "02 Rush - A Passage To Bangkok.mp3",
+            "03 Rush - The Twilight Zone.mp3",
+            "04 Rush - Lessons.mp3",
+            "05 Rush - Tears.mp3",
+            "06 Rush - Something For Nothing.mp3"
+        ],
+        "A Farewell to Kings": [
+            "01 Rush - A Farewell To Kings.mp3",
+            "02 Rush - Xanadu.mp3",
+            "03 Rush - Closer To The Heart.mp3",
+            "04 Rush - Cinderella Man.mp3",
+            "05 Rush - Madrigal.mp3",
+            "06 Rush - Cygnus X-1.mp3"
+        ],
+        "A Show Of Hands": [
+            "01 Rush - Intro (live).mp3",
+            "02 Rush - The Big Money (live).mp3",
+            "03 Rush - Subdivisions (live).mp3",
+            "04 Rush - Marathon (live).mp3",
+            "05 Rush - Turn The Page (live).mp3",
+            "06 Rush - Manhattan Project (live).mp3",
+            "07 Rush - Mission (live).mp3",
+            "08 Rush - Distant Early Warning (live).mp3",
+            "09 Rush - Mystic Rhythms (live).mp3",
+            "10 Rush - Witch Hunt (live).mp3",
+            "11 Rush - The Rhythm Method (live).mp3",
+            "12 Rush - Force Ten (live).mp3",
+            "13 Rush - Time Stand Still (live).mp3",
+            "14 Rush - Red Sector A (live).mp3",
+            "15 Rush - Closer To The Heart (live).mp3"
+        ],
+        "All the World's a Stage": [
+            "01 Rush - Bastille Day.mp3",
+            "02 Rush - Anthem.mp3",
+            "03 Rush - Fly by Night, In the Mood.mp3",
+            "04 Rush - Something for Nothing.mp3",
+            "05 Rush - Lakeside Park.mp3",
+            "06 Rush - 2112.mp3",
+            "07 Rush - By-Tor and the Snow Dog.mp3",
+            "08 Rush - In the End.mp3",
+            "09 Rush - Working Man, Finding My Way.mp3",
+            "10 Rush - What You're Doing.mp3"
+        ],
+        "Caress Of Steel": [
+            "01 Rush - Bastille Day.mp3",
+            "02 Rush - I Think I'm Going Bald.mp3",
+            "03 Rush - Lakeside Park.mp3",
+            "04 Rush - The Necromancer.mp3",
+            "05 Rush - The Fountain Of Lamneth.mp3"
+        ],
+        "Chronicles (Disc 1)": [
+            "01 Rush - Finding My Way.mp3",
+            "02 Rush - Working Man.mp3",
+            "03 Rush - Fly by Night.mp3",
+            "04 Rush - Anthem.mp3",
+            "05 Rush - Bastille Day.mp3",
+            "06 Rush - Lakeside Park.mp3",
+            "07 Rush - 2112- I. Overture - II. The Temples of Syrinx.mp3",
+            "08 Rush - What You're Doing (live).mp3",
+            "09 Rush - A Farewell to Kings.mp3",
+            "10 Rush - Closer to the Heart.mp3",
+            "11 Rush - The Trees.mp3",
+            "12 Rush - La Villa Strangiato.mp3",
+            "13 Rush - Freewill.mp3",
+            "14 Rush - The Spirit of Radio.mp3"
+        ],
+        "Chronicles (Disc 2)": [
+            "01 Rush - Tom Sawyer.mp3",
+            "02 Rush - Red Barchetta.mp3",
+            "03 Rush - Limelight.mp3",
+            "04 Rush - A Passage To Bangkok (Live).mp3",
+            "05 Rush - Subdivisions.mp3",
+            "06 Rush - New World Man.mp3",
+            "07 Rush - Distant Early Warning.mp3",
+            "08 Rush - Red Sector A.mp3",
+            "09 Rush - The Big Money.mp3",
+            "10 Rush - Manhattan Project.mp3",
+            "11 Rush - Force Ten.mp3",
+            "12 Rush - Time Stand Still.mp3",
+            "13 Rush - Mystic Rhythms (Live).mp3",
+            "14 Rush - Show Don't Tell.mp3"
+        ],
+        "Counterparts": [
+            "01 Rush - Animate.mp3",
+            "02 Rush - Stick It Out.mp3",
+            "03 Rush - Cut To The Chase.mp3",
+            "04 Rush - Nobody's Hero.mp3",
+            "05 Rush - Between Sun And Moon.mp3",
+            "06 Rush - Alien Shore.mp3",
+            "07 Rush - The Speed Of Love.mp3",
+            "08 Rush - Double Agent.mp3",
+            "09 Rush - Leave That Thing Alone.mp3",
+            "10 Rush - Cold Fire.mp3",
+            "11 Rush - Everyday Glory.mp3"
+        ],
+        "Different Stages (Disc 1)": [
+            "01 Rush - Dreamline.mp3",
+            "02 Rush - Limelight.mp3",
+            "03 Rush - Driven.mp3",
+            "04 Rush - Bravado.mp3",
+            "05 Rush - Animate.mp3",
+            "06 Rush - Show Don't Tell.mp3",
+            "07 Rush - The Trees.mp3",
+            "08 Rush - Nobody's Hero.mp3",
+            "09 Rush - Closer To The Heart.mp3",
+            "10 Rush - 2112 (Part 1-Overture).mp3",
+            "11 Rush - 2112 (Part 2-The Temples Of Syrinx).mp3",
+            "12 Rush - 2112 (Part 3-Discovery).mp3",
+            "13 Rush - 2112 (Part 4-Presentation).mp3",
+            "14 Rush - 2112 (Part 5-Oracle [The Dream]).mp3",
+            "15 Rush - 2112 (Part 6-Soliloquy).mp3",
+            "16 Rush - 2112 (Part 7-Grand Finale).mp3"
+        ],
+        "Different Stages (Disc 2)": [
+            "01 Rush - Test For Echo.mp3",
+            "02 Rush - The Analog Kid.mp3",
+            "03 Rush - Freewill.mp3",
+            "04 Rush - Roll The Bones.mp3",
+            "05 Rush - Stick It Out.mp3",
+            "06 Rush - Resist.mp3",
+            "07 Rush - Leave That Thing Alone.mp3",
+            "08 Rush - The Rhythm Method.mp3",
+            "09 Rush - Natural Science.mp3",
+            "10 Rush - The Spirit Of Radio.mp3",
+            "11 Rush - Tom Sawyer.mp3",
+            "12 Rush - YYZ.mp3"
+        ],
+        "Different Stages (Disc 3) (Live at Hammersmith Ballroom, London; February 20, 1978)": [
+            "01 Rush - Bastille Day.mp3",
+            "02 Rush - By-Tor And The Snow Dog.mp3",
+            "03 Rush - Xanadu.mp3",
+            "04 Rush - A Farewell To Kings.mp3",
+            "05 Rush - Something For Nothing.mp3",
+            "06 Rush - Cygnus X-1.mp3",
+            "07 Rush - Anthem.mp3",
+            "08 Rush - Working Man.mp3",
+            "09 Rush - Fly By Night.mp3",
+            "10 Rush - In The Mood.mp3",
+            "11 Rush - Cinderella Man.mp3"
+        ],
+        "Exit... Stage Left": [
+            "01 Rush - The Spirit Of Radio.mp3",
+            "02 Rush - Red Barchetta.mp3",
+            "03 Rush - YYZ.mp3",
+            "04 Rush - A Passage To Bangkok.mp3",
+            "05 Rush - Closer To The Heart.mp3",
+            "06 Rush - Beneath, Between & Behind.mp3",
+            "07 Rush - Jacob's Ladder.mp3",
+            "08 Rush - Broon's Bane.mp3",
+            "09 Rush - The Trees.mp3",
+            "10 Rush - Xanadu.mp3",
+            "11 Rush - Freewill.mp3",
+            "12 Rush - Tom Sawyer.mp3",
+            "13 Rush - La Villa Strangiato.mp3"
+        ],
+        "Fly By Night": [
+            "01 Rush - Anthem.mp3",
+            "02 Rush - Best I Can.mp3",
+            "03 Rush - Beneath, Between & Behind.mp3",
+            "04 Rush - By-Tor & the Snow Dog.mp3",
+            "05 Rush - Fly By Night.mp3",
+            "06 Rush - Making Memories.mp3",
+            "07 Rush - Rivendell.mp3",
+            "08 Rush - In the End.mp3"
+        ],
+        "Grace Under Pressure (Remastered)": [
+            "01 Rush - Distant Early Warning.mp3",
+            "02 Rush - Afterimage.mp3",
+            "03 Rush - Red Sector A.mp3",
+            "04 Rush - The Enemy Within.mp3",
+            "05 Rush - The Body Electric.mp3",
+            "06 Rush - Kid Gloves.mp3",
+            "07 Rush - Red Lenses.mp3",
+            "08 Rush - Between The Wheels.mp3"
+        ],
+        "Grace Under Pressure Tour [Live]": [
+            "01 Intro.mp3",
+            "02 The Spirit Of Radio.mp3",
+            "03 The Enemy Within.mp3",
+            "04 The Weapon.mp3",
+            "05 Witch Hunt.mp3",
+            "06 New World Man.mp3",
+            "07 Distant Early Warning.mp3",
+            "08 Red Sector A.mp3",
+            "09 Closer To The Heart.mp3",
+            "10 YYZ - Temples Of Syrinx - Tom Sawyer.mp3",
+            "11 Vital Signs.mp3",
+            "12 Finding My Way - In The Mood.mp3"
+        ],
+        "Hemispheres": [
+            "01 Rush - Cygnus X-1 Book II- Hemispheres.mp3",
+            "02 Rush - Circumstances.mp3",
+            "03 Rush - The Trees.mp3",
+            "04 Rush - La Villa Strangiato.mp3"
+        ],
+        "Hold Your Fire": [
+            "01 Force Ten.mp3",
+            "02 Time Stand Still.mp3",
+            "03 Open Secrets.mp3",
+            "04 Second Nature.mp3",
+            "05 Prime Mover.mp3",
+            "06 Lock and Key.mp3",
+            "07 Mission.mp3",
+            "08 Turn the Page.mp3",
+            "09 Tai Shan.mp3",
+            "10 High Water.mp3"
+        ],
+        "Moving Pictures": [
+            "01 Rush - Tom Sawyer.mp3",
+            "02 Rush - Red Barchetta.mp3",
+            "03 Rush - YYZ.mp3",
+            "04 Rush - Limelight.mp3",
+            "05 Rush - The Camera Eye.mp3",
+            "06 Rush - Witch Hunt.mp3",
+            "07 Rush - Vital Signs.mp3"
+        ],
         "Permanent Waves": [
-            "01 Rush - The Spirit Of Radio.mp3"
+            "01 Rush - The Spirit Of Radio.mp3",
+            "02 Rush - Freewill.mp3",
+            "03 Rush - Jacob's Ladder.mp3",
+            "04 Rush - Entre Nous.mp3",
+            "05 Rush - Different Strings.mp3",
+            "06 Rush - Natural Science.mp3"
+        ],
+        "Power Windows (Remastered)": [
+            "01 Rush - The Big Money.mp3",
+            "02 Rush - Grand Designs.mp3",
+            "03 Rush - Manhattan Project.mp3",
+            "04 Rush - Marathon.mp3",
+            "05 Rush - Territories.mp3",
+            "06 Rush - Middletown Dreams.mp3",
+            "07 Rush - Emotion Detector.mp3",
+            "08 Rush - Mystic Rhythms.mp3"
+        ],
+        "Presto": [
+            "01 Rush - Show Don't Tell.mp3",
+            "02 Rush - Chain Lightning.mp3",
+            "03 Rush - The Pass.mp3",
+            "04 Rush - War Paint.mp3",
+            "05 Rush - Scars.mp3",
+            "06 Rush - Presto.mp3",
+            "07 Rush - Superconductor.mp3",
+            "08 Rush - Anagram (For Mongo).mp3",
+            "09 Rush - Red Tide.mp3",
+            "10 Rush - Hand Over Fist.mp3",
+            "11 Rush - Available Light.mp3"
+        ],
+        "Retrospective I 1974-1980": [
+            "01 Rush - The Spirit Of The Radio.mp3",
+            "02 Rush - The Trees.mp3",
+            "03 Rush - Something For Nothing.mp3",
+            "04 Rush - Freewill.mp3",
+            "05 Rush - Xanadu.mp3",
+            "06 Rush - Bastille Day.mp3",
+            "07 Rush - By-Tor And The Snow Dog.mp3",
+            "08 Rush - Anthem.mp3",
+            "09 Rush - Closer To The Heart.mp3",
+            "10 Rush - 2112 Overture.mp3",
+            "11 Rush - The Temples Of Syrinx.mp3",
+            "12 Rush - La Villa Strangiato.mp3",
+            "13 Rush - Fly By Night.mp3",
+            "14 Rush - Finding My Way.mp3"
+        ],
+        "Retrospective II 1981-1987": [
+            "01 Rush - The Big Money.mp3",
+            "02 Rush - Red Barchetta.mp3",
+            "03 Rush - Subdivisions.mp3",
+            "04 Rush - Time Stand Still.mp3",
+            "05 Rush - Mystic Rhythms.mp3",
+            "06 Rush - The Analog Kid.mp3",
+            "07 Rush - Distant Early Warning.mp3",
+            "08 Rush - Marathon.mp3",
+            "09 Rush - The Body Electric.mp3",
+            "10 Rush - Mission.mp3",
+            "11 Rush - Limelight.mp3",
+            "12 Rush - Red Sector A.mp3",
+            "13 Rush - New World Man.mp3",
+            "14 Rush - Tom Sawyer.mp3",
+            "15 Rush - Force Ten.mp3"
+        ],
+        "Roll The Bones": [
+            "01 Rush - Dreamline.mp3",
+            "02 Rush - Bravado.mp3",
+            "03 Rush - Roll The Bones.mp3",
+            "04 Rush - Face Up.mp3",
+            "05 Rush - Where's My Thing.mp3",
+            "06 Rush - The Big Wheel.mp3",
+            "07 Rush - Heresy.mp3",
+            "08 Rush - Ghost Of A Chance.mp3",
+            "09 Rush - Neurotica.mp3",
+            "10 Rush - You Bet Your Life.mp3"
+        ],
+        "Rush - Rush (Remastered)": [
+            "Rush - Before & After.mp3",
+            "Rush - Finding My Way.mp3",
+            "Rush - Here Again.mp3",
+            "Rush - In The Mood.mp3",
+            "Rush - Need Some Love.mp3",
+            "Rush - Take A Friend.mp3",
+            "Rush - What You're Doing.mp3",
+            "Rush - Working Man.mp3"
+        ],
+        "Rush in Rio (Disc 1)": [
+            "01 RUSH - Tom Sawyer.mp3",
+            "02 RUSH - Distant Early Warning.mp3",
+            "03 RUSH - New World Man.mp3",
+            "04 RUSH - Roll the Bones.mp3",
+            "05 RUSH - Earthshine.mp3",
+            "06 RUSH - YYZ.mp3",
+            "07 RUSH - The Pass.mp3",
+            "08 RUSH - Bravado.mp3",
+            "09 RUSH - The Big Money.mp3",
+            "10 RUSH - Trees.mp3",
+            "11 RUSH - Freewill.mp3",
+            "12 RUSH - Closer to the Heart.mp3",
+            "13 RUSH - Natural Science.mp3"
+        ],
+        "Rush In Rio (Disc 2)": [
+            "01 Rush - One Little Victory.mp3",
+            "02 Rush - Driven.mp3",
+            "03 Rush - Ghost Rider.mp3",
+            "04 Rush - Secret Touch.mp3",
+            "05 Rush - Dreamline.mp3",
+            "06 Rush - Red Sector A.mp3",
+            "07 Rush - Leave That Thing Alone.mp3",
+            "08 Rush - O Baterista.mp3",
+            "09 Rush - Resist.mp3",
+            "10 Rush - 2112.mp3"
+        ],
+        "Rush in Rio (Live) (Disc 3)": [
+            "01 Rush - Limelight.mp3",
+            "02 Rush - La Villa Strangiato.mp3",
+            "03 Rush - The Spirit of Radio.mp3",
+            "04 Rush - By-Tor and the Snow Dog.mp3",
+            "05 Rush - Cygnus X-1.mp3",
+            "06 Rush - Working Man.mp3",
+            "07 Rush - Between Sun & Moon (Board Bootleg recorded at Phoenix, AZ).mp3",
+            "08 Rush - Vital Signs (Board Bootleg recorded at Quebec City, PQ).mp3"
+        ],
+        "Signals (Remastered)": [
+            "01 Rush - Subdivisions.mp3",
+            "02 Rush - The Analog Kid.mp3",
+            "03 Rush - Chemistry.mp3",
+            "04 Rush - Digital Man.mp3",
+            "05 Rush - The Weapon.mp3",
+            "06 Rush - New World Man.mp3",
+            "07 Rush - Losing It.mp3",
+            "08 Rush - Countdown.mp3"
+        ],
+        "Snakes & Arrows": [
+            "01 RUSH - Far Cry - Rush.mp3",
+            "02 RUSH - Armor and Sword - Rush.mp3",
+            "03 RUSH - Workin' Them Angels - Rush.mp3",
+            "04 RUSH - The Larger Bowl - Rush.mp3",
+            "05 RUSH - Spindrift - Rush.mp3",
+            "06 RUSH - The Main Monkey Business - Rush.mp3",
+            "07 RUSH - The Way the Wind Blows - Rush.mp3",
+            "08 RUSH - Hope - Rush.mp3",
+            "09 RUSH - Faithless - Rush.mp3",
+            "10 RUSH - Bravest Face - Rush.mp3",
+            "11 RUSH - Good News First - Rush.mp3",
+            "12 RUSH - Malignant Narcissism - Rush.mp3",
+            "13 RUSH - We Hold On - Rush.mp3"
+        ],
+        "Snakes & Arrows Live - Disc 1": [
+            "01 Rush - Limelight.mp3",
+            "02 Rush - Digital Man.mp3",
+            "03 Rush - Entre Nous.mp3",
+            "04 Rush - Mission.mp3",
+            "05 Rush - Freewill.mp3",
+            "06 Rush - The Main Monkey Business.mp3",
+            "07 Rush - The Larger Bowl.mp3",
+            "08 Rush - Secret Touch.mp3",
+            "09 Rush - Circumstances.mp3",
+            "10 Rush - Between the Wheels.mp3",
+            "11 Rush - Dreamline.mp3",
+            "12 Rush - Far Cry.mp3",
+            "13 Rush - Workin' Them Angels.mp3",
+            "14 Rush - Armor and Sword.mp3"
+        ],
+        "Snakes & Arrows Live - Disc 2": [
+            "01 Rush - Spindrift.mp3",
+            "02 Rush - The Way The Wind Blows.mp3",
+            "03 Rush - Subdivisions.mp3",
+            "04 Rush - Natural Science.mp3",
+            "05 Rush - Witch Hunt.mp3",
+            "06 Rush - Malignant Narcissism - De Slagwerker.mp3",
+            "07 Rush - Hope.mp3",
+            "08 Rush - Distant Early Warning.mp3",
+            "09 Rush - The Spirit Of Radio.mp3",
+            "10 Rush - Tom Sawyer.mp3",
+            "11 Rush - One Little Victory.mp3",
+            "12 Rush - A Passage To Bangkok.mp3",
+            "13 Rush - YYZ.mp3"
+        ],
+        "Test for Echo": [
+            "01 Rush - Test for Echo.mp3",
+            "02 Rush - Driven.mp3",
+            "03 Rush - Half the World.mp3",
+            "04 Rush - The Color of Right.mp3",
+            "05 Rush - Time and Motion.mp3",
+            "06 Rush - Totem.mp3",
+            "07 Rush - Dog Years.mp3",
+            "08 Rush - Virtuality.mp3",
+            "09 Rush - Resist.mp3",
+            "10 Rush - Limbo.mp3",
+            "11 Rush - Carve Away the Stone.mp3"
+        ],
+        "Time Machine 2011- Live In Cleveland": [
+            "01 - The Spirit of Radio (Live in Cleveland).mp3",
+            "02 - Time Stand Still (Live in Cleveland).mp3",
+            "03 - Presto (Live in Cleveland).mp3",
+            "04 - Stick It Out (Live in Cleveland).mp3",
+            "05 - Workin' Them Angels (Live in Cleveland).mp3",
+            "06 - Leave That Thing Alone (Live in Cleveland).mp3",
+            "07 - Faithless (Live in Cleveland).mp3",
+            "08 - BU2B (Live In Cleveland).mp3",
+            "09 - Free Will (Live in Cleveland).mp3",
+            "10 - Marathon (Live in Cleveland).mp3",
+            "11 - Subdivisions (Live in Cleveland).mp3",
+            "12 - Tom Sawyer (Live in Cleveland).mp3",
+            "13 - Red Barchetta (Live in Cleveland).mp3",
+            "14 - YYZ (Live in Cleveland).mp3",
+            "15 - Limelight (Live in Cleveland).mp3",
+            "16 - The Camera Eye (Live in Cleveland).mp3",
+            "17 - Witch Hunt (Live in Cleveland).mp3",
+            "18 - Vital Signs (Live in Cleveland).mp3",
+            "19 - Caravan (Live in Cleveland).mp3",
+            "20 - Moto Perpetuo (Live in Cleveland).mp3",
+            "21 - O'Malley's Break (Live in Cleveland).mp3",
+            "22 - Closer to the Heart (Live in Cleveland).mp3",
+            "23 - 2112 Overture _ The Temples of Syrinx (Live in Cleveland).mp3",
+            "24 - Far Cry (Live in Cleveland).mp3",
+            "25 - La Villa Strangiato (Live in Cleveland).mp3",
+            "26 - Working Man (Live in Cleveland).mp3"
+        ],
+        "Vapor Trails": [
+            "01 Rush - One Little Victory.mp3",
+            "02 Rush - Ceiling Unlimited.mp3",
+            "03 Rush - Ghost Rider.mp3",
+            "04 Rush - Peaceable Kingdom.mp3",
+            "05 Rush - The Stars Look Down.mp3",
+            "06 Rush - How It Is.mp3",
+            "07 Rush - Vapor Trail.mp3",
+            "08 Rush - Secret Touch.mp3",
+            "09 Rush - Earthshine.mp3",
+            "10 Rush - Sweet Miracle.mp3",
+            "11 Rush - Nocturne.mp3",
+            "12 Rush - Freeze (Part IV Of 'Fear').mp3",
+            "13 Rush - Out Of The Cradle.mp3"
+        ]
+    },
+    "Sarah McLachlan": {
+        "Mirrorball": [
+            "01 - Building a Mystery [Explicit].mp3",
+            "02 - Hold On (Live).mp3",
+            "03 - Good Enough [Explicit].mp3",
+            "04 - I Will Remember You (Live).mp3",
+            "05 - Adia.mp3",
+            "06 - I Love You.mp3",
+            "07 - Do What You Have to Do (Live).mp3",
+            "08 - The Path of Thorns (Terms).mp3",
+            "09 - Fear.mp3",
+            "10 - Possession (Live).mp3",
+            "11 - Sweet Surrender.mp3",
+            "12 - Ice Cream.mp3",
+            "13 - Fumbling Towards Ecstasy.mp3",
+            "14 - Angel (Live).mp3"
+        ]
+    },
+    "Savage Garden": {
+        "Savage Garden": [
+            "01 Savage Garden - To the Moon & Back.mp3",
+            "02 Savage Garden - I Want You.mp3",
+            "03 Savage Garden - Truly Madly Deeply.mp3",
+            "04 Savage Garden - Tears of Pearls.mp3",
+            "05 Savage Garden - Universe.mp3",
+            "06 Savage Garden - Carry on Dancing.mp3",
+            "07 Savage Garden - Violet.mp3",
+            "08 Savage Garden - Break Me Shake Me.mp3",
+            "09 Savage Garden - A Thousand Words.mp3",
+            "10 Savage Garden - Promises.mp3",
+            "11 Savage Garden - Santa Monica.mp3"
+        ]
+    },
+    "Scorpions": {
+        "Unknown Album": [
+            "(Disc 2) 01 - Dont Stop At The Top.mp3"
+        ]
+    },
+    "Seether": {
+        "Unknown Album": [
+            "02 - Remedy.mp3"
+        ]
+    },
+    "Shinedown": {
+        "Leave A Whisper (Deluxe)": [
+            "01-16- Simple Man [Rock Version].mp3"
+        ]
+    },
+    "Simple Minds": {
+        "Unknown Album": [
+            "Simple Minds-Don't You (Forget About Me).mp3"
+        ]
+    },
+    "Steve Miller Band": {
+        "Unknown Album": [
+            "02 - Fly Like An Eagle.mp3"
+        ]
+    },
+    "Steve Windwood": {
+        "Unknown Album": [
+            "Steve Winwood - Higher Love.mp3"
+        ]
+    },
+    "Stone Temple Pilots": {
+        "Purple": [
+            "01 Meatplow.mp3",
+            "02 Vasoline.mp3",
+            "03 Lounge Fly.mp3",
+            "04 Interstate Love Song.mp3",
+            "05 Still Remains.mp3",
+            "06 Pretty Penny.mp3",
+            "07 Silvergun Superman.mp3",
+            "08 Big Empty.mp3",
+            "09 Unglued.mp3",
+            "10 Army Ants.mp3",
+            "11 Kitchenware & Candybars   Second Album.mp3"
         ]
     },
     "Survivor": {
         "Ultimate Survivor": [
-            "09 High on You.mp3"
+            "01 Eye of the Tiger.mp3",
+            "02 Poor Man\u2019s Son.mp3",
+            "03 I Can\u2019t Hold Back.mp3",
+            "04 Is This Love.mp3",
+            "05 The Search Is Over.mp3",
+            "06 Burning Heart.mp3",
+            "07 First Night.mp3",
+            "08 Across the Miles.mp3",
+            "09 High on You.mp3",
+            "10 Man Against the World.mp3",
+            "11 Desperate Dreams.mp3",
+            "12 American Heartbeat.mp3",
+            "13 Caught in the Game.mp3",
+            "14 Didn\u2019t Know It Was Love.mp3",
+            "15 Rebel Girl.mp3",
+            "16 Summer Nights (full length version).mp3",
+            "17 Somewhere in America.mp3",
+            "18 Rockin\u2019 Into the Night.mp3"
+        ]
+    },
+    "Switchfoot": {
+        "Unknown Album": [
+            "03 - Your Love Is A Song.mp3"
+        ]
+    },
+    "The B-52's": {
+        "Unknown Album": [
+            "The B-52's-Rock Lobster.mp3"
+        ]
+    },
+    "The Bands and Ensembles of the US Armed Forces": {
+        "Veterans Day Honor": [
+            "01-02- Star Spangled Banner (The National Anthem).mp3"
+        ]
+    },
+    "The Goo Goo Dolls": {
+        "Unknown Album": [
+            "The Goo Goo Dolls-Slide.MP3"
+        ]
+    },
+    "The Police": {
+        "Unknown Album": [
+            "The Police - Every Breath You Take.mp3"
+        ]
+    },
+    "Third Day": {
+        "Come Together": [
+            "03 - Show Me Your Glory.mp3",
+            "12 - Nothing Compares.mp3"
+        ],
+        "Move": [
+            "05 - Trust In Jesus.mp3"
+        ],
+        "Offerings II All I Have to Give": [
+            "02 - You Are So Good To Me.mp3"
+        ],
+        "Revelation": [
+            "05 - Revelation.mp3"
+        ],
+        "Wherever You Are": [
+            "03 - Cry Out To Jesus.mp3"
+        ]
+    },
+    "Thomas Dolby": {
+        "Unknown Album": [
+            "Thomas Dolby-She Blinded Me With Science.mp3"
+        ]
+    },
+    "Thompson Twins": {
+        "Unknown Album": [
+            "Thompson Twins - Hold Me Now.mp3"
+        ]
+    },
+    "Tim McGraw": {
+        "Unknown Album": [
+            "03 It's Your Love.mp3"
+        ],
+        "Greatest Hits": [
+            "01-02- Dont Take The Girl.mp3"
+        ],
+        "Number One Hits disc 2": [
+            "01 Tim McGraw - Southern Voice - Tim McGraw.mp3",
+            "02 Tim McGraw - My Best Friend - Tim McGraw.mp3",
+            "03 Tim McGraw - Everywhere - Tim McGraw.mp3",
+            "04 Tim McGraw - Grown Men Don't Cry - Tim McGraw.mp3",
+            "05 Tim McGraw - Back When - Tim McGraw.mp3",
+            "06 Tim McGraw - Angry All The Time - Tim McGraw.mp3",
+            "07 Tim McGraw - Last Dollar (Fly Away) - Tim McGraw.mp3",
+            "08 Tim McGraw - Unbroken - Tim McGraw.mp3",
+            "09 Tim McGraw - Where The Green Grass Grows - Tim McGraw.mp3",
+            "10 Tim McGraw - Not A Moment Too Soon - Tim McGraw.mp3",
+            "11 Tim McGraw - Indian Outlaw (Dance Mix) - Tim McGraw.mp3",
+            "12 Tim McGraw - Felt Good On My Lips - Tim McGraw.mp3"
+        ]
+    },
+    "Tobymac": {
+        "Tonight": [
+            "02 - Get Back Up.mp3"
+        ]
+    },
+    "Trapt": {
+        "Still Frame (Internet Single) [Explicit]": [
+            "01-01- Still Frame (Album Version).mp3"
+        ]
+    },
+    "Trey Songz": {
+        "Passion, Pain & Pleasure": [
+            "01-05- Bottoms Up (feat Nicki Minaj).mp3"
+        ]
+    },
+    "Van Halen": {
+        "Live- Right Here, Right Now (Disc One)": [
+            "01 Van Halen - Poundcake.mp3",
+            "02 Van Halen - Judgement Day.mp3",
+            "03 Van Halen - When It's Love.mp3",
+            "04 Van Halen - Spanked.mp3",
+            "05 Van Halen - Ain't Talkin' 'Bout Love.mp3",
+            "06 Van Halen - In 'n' Out.mp3",
+            "07 Van Halen - Dreams.mp3",
+            "08 Van Halen - Man on a Mission.mp3",
+            "09 Van Halen - Ultra Bass.mp3",
+            "10 Van Halen - Pleasure Dome ^ Drum Solo.mp3",
+            "11 Van Halen - Panama.mp3",
+            "12 Van Halen - Love Walks In.mp3",
+            "13 Van Halen - Runaround.mp3"
+        ],
+        "Live- Right Here, Right Now (Disc Two)": [
+            "01 Van Halen - Right Now.mp3",
+            "02 Van Halen - One Way to Rock.mp3",
+            "03 Van Halen - Why Can't This Be Love^.mp3",
+            "04 Van Halen - Give to Live.mp3",
+            "05 Van Halen - Finish What Ya Started.mp3",
+            "06 Van Halen - Best of Both Worlds.mp3",
+            "07 Van Halen - 316.mp3",
+            "08 Van Halen - You Really Got Me + Cabo Wabo.mp3",
+            "09 Van Halen - Won't Get Fooled Again.mp3",
+            "10 Van Halen - Jump.mp3",
+            "11 Van Halen - Top of the World.mp3"
+        ]
+    },
+    "Various Artists": {
+        "Christmas Favorites": [
+            "01 My Favorite Things.mp3",
+            "02 Joy to the World.mp3",
+            "03 The Christmas Song (Chestnuts Roasting on an Open Fire).mp3",
+            "04 O Holy Night.mp3",
+            "05 Happy Holiday.mp3",
+            "06 God Rest Ye Merry, Gentlemen.mp3",
+            "07 White Christmas.mp3",
+            "08 The Little Drummer Boy.mp3",
+            "09 Sleigh Ride.mp3",
+            "10 Angels We Have Heard on High.mp3"
+        ],
+        "Classical Christmas": [
+            "01 Sonata Natalis in C major.mp3",
+            "02 Messiah  And the Glory of the Lord.mp3",
+            "03 Messiah  And He Shall Purify.mp3",
+            "04 Messiah  For Unto Us a Child Is Born.mp3",
+            "05 Christmas Oratorio, BWV 248  Sinfonia in G major.mp3",
+            "06 Messiah  All We Like Sheep.mp3",
+            "07 Concerto in C major, op. 3 no. 12  Largo.mp3",
+            "08 Concerto in C major, op. 3 no. 12  Allegro.mp3",
+            "09 Concerto in C major, op. 3 no. 12  Allegro.mp3",
+            "10 Messiah  Hallelujah.mp3",
+            "11 Messiah  Pastoral Symphony.mp3",
+            "12 Messiah  Worthy Is the Lamb-Amen.mp3",
+            "13 Concerto fatto per la Notte di Natale in G minor, op. 6 no. 8  Allegro - Largo (Pastorale ad libitum).mp3",
+            "14 Ave verum corpus (K. 618).mp3",
+            "15 Concerto fatto per la Notte di Natale in G minor, op. 6 no. 8  Adagio - Allegro - Adagio.mp3",
+            "16 T\u00f6net, ihr Pauken! Erschallet, Trompeten!.mp3"
+        ],
+        "Holiday Favorites  Christmas Collection, Volume 1": [
+            "01 White Christmas.mp3",
+            "02 Have Yourself a Merry Little Christmas.mp3",
+            "03 My Favorite Things.mp3",
+            "04 The Star Carol.mp3",
+            "05 It's the Most Wonderful Time of the Year.mp3",
+            "06 The Christmas Song.mp3",
+            "07 Sleigh Ride.mp3",
+            "08 Winter Wonderland.mp3",
+            "09 Silent Night, Holy Night.mp3",
+            "10 We Wish You a Merry Christmas.mp3"
+        ],
+        "It's Christmas Time": [
+            "01 First Noel, The.mp3",
+            "02 It Came Upon A Midnight Clear.mp3",
+            "03 Gounod's  Ave Maria.mp3",
+            "04 We Three Kings of Orient Are.mp3",
+            "05 God Rest Ye Merry Gentlemen.mp3",
+            "06 O Come, All Ye Faithful.mp3",
+            "07 What Child Is This.mp3",
+            "08 Santo Natale.mp3",
+            "09 Coventry Carol.mp3",
+            "10 Here We Come A-Caroling.mp3"
+        ],
+        "Sharon O'Connor's Christmas Stars": [
+            "01 Oh Come, All Ye Faithful.mp3",
+            "02 Hark! The Herald Angels Sing.mp3",
+            "03 Deck the Halls.mp3",
+            "04 Away in the Manger.mp3",
+            "05 Carol of the Bells.mp3",
+            "06 Rocking.mp3",
+            "07 What Child is This.mp3",
+            "08 Angels We Have Heard on High.mp3",
+            "09 Oh Come, Oh Come, Emmanuel.mp3",
+            "10 In dulci jubilo.mp3",
+            "11 Coventry Carol.mp3",
+            "12 I Wonder as I Wander.mp3"
+        ]
+    },
+    "Wham": {
+        "Unknown Album": [
+            "05 - Wake Me Up Before You Go-Go.mp3"
+        ]
+    },
+    "Whitney Houston": {
+        "Whitney The Greatest Hits": [
+            "02-18- The Star Spangled Banner.mp3"
+        ]
+    },
+    "Wiz Khalifa": {
+        "Rolling Papers": [
+            "01-03- Black And Yellow.mp3"
         ]
     }
 }
