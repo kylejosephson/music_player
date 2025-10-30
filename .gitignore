@@ -1,21 +1,16 @@
-# Python cache files
+# Existing ignore rules ...
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Virtual environments
 env/
 venv/
-
-# IDE / Editor folders
 .vscode/
 .idea/
-
-# OS-specific junk
 .DS_Store
 Thumbs.db
-
-# Log or temporary files
 *.log
 *.tmp
+
+# Ignore backup data
+backups/
