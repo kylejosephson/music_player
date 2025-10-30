@@ -6,10 +6,12 @@ from PyQt5.QtCore import Qt
 
 
 class LibraryTab(QWidget):
-    def __init__(self, library_path, add_to_queue_callback):
+    def __init__(self, library_path, add_to_player_queue_callback, add_to_playlist_queue_callback):
         super().__init__()
         self.library_path = library_path
-        self.add_to_queue_callback = add_to_queue_callback
+        self.add_to_player_queue_callback = add_to_player_queue_callback
+        self.add_to_playlist_queue_callback = add_to_playlist_queue_callback
+
         self.cache_file = os.path.join(os.getcwd(), "library_cache.json")
         self.library = {}
         self.last_updated = None
@@ -126,7 +128,7 @@ class LibraryTab(QWidget):
                     self.song_list.addItem(f"{artist} - {album} - {song}")
 
     # ---------------------------------------------------------------
-    # Add selected song to the player queue
+    # Add selected song to BOTH queues
     # ---------------------------------------------------------------
     def add_selected_to_queue(self, item):
         text = item.text()
@@ -138,8 +140,11 @@ class LibraryTab(QWidget):
         song = " - ".join(parts[2:]) if len(parts) > 2 else parts[-1]
         full_path = os.path.join(self.library_path, artist, album, song)
         if os.path.exists(full_path):
-            print(f"🎶 Added to queue: {song}")
-            self.add_to_queue_callback(full_path)
+            print(f"🎶 Added to queues: {song}")
+            # Send to player queue
+            self.add_to_player_queue_callback(full_path)
+            # Send to playlist-builder queue
+            self.add_to_playlist_queue_callback(full_path)
         else:
             QMessageBox.warning(self, "Error", f"File not found:\n{full_path}")
 

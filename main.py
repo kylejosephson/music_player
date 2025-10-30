@@ -4,6 +4,7 @@ from player_tab import PlayerTab
 from playlist_tab import PlaylistTab
 from library_tab import LibraryTab
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,9 +23,14 @@ class MainWindow(QMainWindow):
         self.playlist_tab = PlaylistTab(self.player_tab)
         self.tabs.addTab(self.playlist_tab, "📜 Playlists")
 
-        # Library tab (with proper parameters)
-        self.library_tab = LibraryTab("C:\\Users\\kylej\\Music", self.player_tab.add_song_to_queue)
+        # Library tab (dual callbacks: to player queue AND playlist-builder queue)
+        self.library_tab = LibraryTab(
+            "C:\\Users\\kylej\\Music",
+            add_to_player_queue_callback=self.player_tab.add_song_to_queue,
+            add_to_playlist_queue_callback=self.playlist_tab.add_to_playlist_queue
+        )
         self.tabs.addTab(self.library_tab, "📚 Library")
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
