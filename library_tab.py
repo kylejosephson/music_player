@@ -18,10 +18,19 @@ class LibraryTab(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        # Status label (last update time)
-        self.status_label = QLabel("Library not loaded yet.")
-        self.status_label.setAlignment(Qt.AlignCenter)
-        layout.addWidget(self.status_label)
+        # --- Header label (styled like player tab info area) ---
+        self.header_label = QLabel("Library Manager Ready")
+        self.header_label.setAlignment(Qt.AlignCenter)
+        self.header_label.setStyleSheet("""
+            QLabel {
+                color: black;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 8px;
+                border-bottom: 1px solid #333;
+            }
+        """)
+        layout.addWidget(self.header_label)
 
         # Update button
         self.update_button = QPushButton("Update Library")
@@ -47,14 +56,15 @@ class LibraryTab(QWidget):
                 self.last_updated = datetime.fromtimestamp(os.path.getmtime(self.cache_file)).strftime("%Y-%m-%d %I:%M:%S %p")
                 print(f"✅ Loaded library from cache. (last updated {self.last_updated})")
                 self.populate_library()
-                self.status_label.setText(f"Library loaded (cached at {self.last_updated})")
+                self._info(f"Library loaded (cached at {self.last_updated})")
             except Exception as e:
                 print(f"⚠️ Error loading library cache: {e}")
+                self._info("⚠️ Error loading library cache")
         else:
-            self.status_label.setText("No library cache found. Please update library.")
+            self._info("No library cache found. Please update library.")
 
     # ---------------------------------------------------------------
-    # Scan the file system and rebuild library (MP3 / FLAC / WAV)
+    # Scan the file system and rebuild library
     # ---------------------------------------------------------------
     def update_library(self):
         if not os.path.exists(self.library_path):
@@ -71,11 +81,9 @@ class LibraryTab(QWidget):
 
         library_data = {}
         start_time = datetime.now()
-        valid_formats = (".mp3", ".flac", ".wav")
-
         for root, _, files in os.walk(self.library_path):
             for file in files:
-                if file.lower().endswith(valid_formats):
+                if file.lower().endswith(".mp3"):
                     rel_path = os.path.relpath(os.path.join(root, file), self.library_path)
                     parts = rel_path.split(os.sep)
                     artist, album, song = self.parse_path(parts)
@@ -96,8 +104,7 @@ class LibraryTab(QWidget):
         # Log performance
         elapsed = (datetime.now() - start_time).total_seconds()
         print(f"⏱️ Library rebuild took {elapsed:.2f} seconds.")
-
-        self.status_label.setText(f"Library updated at {self.last_updated} ({elapsed:.2f}s)")
+        self._info(f"Library updated at {self.last_updated} ({elapsed:.2f}s)")
 
     # ---------------------------------------------------------------
     # Parse folder structure into Artist / Album / Song
@@ -119,7 +126,7 @@ class LibraryTab(QWidget):
                     self.song_list.addItem(f"{artist} - {album} - {song}")
 
     # ---------------------------------------------------------------
-    # Add selected song to the player queue (MP3 / FLAC / WAV only)
+    # Add selected song to the player queue
     # ---------------------------------------------------------------
     def add_selected_to_queue(self, item):
         text = item.text()
@@ -129,15 +136,16 @@ class LibraryTab(QWidget):
         artist = parts[0]
         album = parts[1] if len(parts) > 2 else "Unknown Album"
         song = " - ".join(parts[2:]) if len(parts) > 2 else parts[-1]
-
-        valid_formats = (".mp3", ".flac", ".wav")
-        if not song.lower().endswith(valid_formats):
-            print(f"⚠️ Skipped non-audio file: {song}")
-            return
-
         full_path = os.path.join(self.library_path, artist, album, song)
         if os.path.exists(full_path):
             print(f"🎶 Added to queue: {song}")
             self.add_to_queue_callback(full_path)
         else:
             QMessageBox.warning(self, "Error", f"File not found:\n{full_path}")
+
+    # ---------------------------------------------------------------
+    # Header info helper (persistent like player tab)
+    # ---------------------------------------------------------------
+    def _info(self, message: str):
+        """Display message persistently in the header label."""
+        self.header_label.setText(message)

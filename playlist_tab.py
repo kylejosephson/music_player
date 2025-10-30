@@ -1,97 +1,134 @@
-# playlist_tab.py
 import os
 import json
-from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QPushButton, QListWidget,
-    QHBoxLayout, QFileDialog, QMessageBox, QLabel
-)
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QListWidget, QHBoxLayout, QInputDialog, QLabel
 from PyQt5.QtCore import Qt
-
 
 class PlaylistTab(QWidget):
     def __init__(self, player_tab):
         super().__init__()
         self.player_tab = player_tab
-        self.playlists_dir = "playlists"
-        os.makedirs(self.playlists_dir, exist_ok=True)
+        self.playlists_file = os.path.join(os.getcwd(), "playlists.json")
+        self.playlists = {}
 
-        layout = QVBoxLayout()
-        self.setLayout(layout)
+        # --- Layout setup ---
+        layout = QVBoxLayout(self)
+        layout.setAlignment(Qt.AlignTop)
 
-        title = QLabel("Playlist Manager")
-        title.setAlignment(Qt.AlignCenter)
-        title.setStyleSheet("font-size: 18px; font-weight: bold; color: white;")
-        layout.addWidget(title)
+        # Playlist info label (styled like player’s info area)
+        self.info_label = QLabel("Playlist Manager Ready")
+        self.info_label.setAlignment(Qt.AlignCenter)
+        self.info_label.setStyleSheet("""
+            QLabel {
+                color: black;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 8px;
+                border-bottom: 1px solid #333;
+            }
+        """)
+        layout.addWidget(self.info_label)
 
         # Playlist list
         self.playlist_list = QListWidget()
-        self.playlist_list.itemDoubleClicked.connect(self.load_playlist)
+        self.playlist_list.itemDoubleClicked.connect(self.load_playlist_to_queue)
         layout.addWidget(self.playlist_list)
 
         # Buttons
-        controls = QHBoxLayout()
-        self.save_button = QPushButton("Save Current Queue")
-        self.save_button.clicked.connect(self.save_playlist)
-        controls.addWidget(self.save_button)
+        button_layout = QHBoxLayout()
+        self.create_button = QPushButton("Create Playlist")
+        self.create_button.clicked.connect(self.create_playlist)
+        button_layout.addWidget(self.create_button)
 
         self.delete_button = QPushButton("Delete Playlist")
         self.delete_button.clicked.connect(self.delete_playlist)
-        controls.addWidget(self.delete_button)
-        layout.addLayout(controls)
+        button_layout.addWidget(self.delete_button)
 
-        self.refresh_button = QPushButton("Refresh Playlist List")
-        self.refresh_button.clicked.connect(self.refresh_playlist_list)
-        layout.addWidget(self.refresh_button)
+        layout.addLayout(button_layout)
+        self.setLayout(layout)
 
-        self.setStyleSheet("""
-            QWidget { background-color: #121212; color: white; }
-            QPushButton { background-color: #1db954; border: none; padding: 5px 10px; border-radius: 5px; }
-            QPushButton:hover { background-color: #1ed760; }
-            QListWidget { background-color: #202020; border: 1px solid #333; }
-        """)
+        self.load_playlists()
 
+    # -----------------------------------------------------------
+    # Load / Save
+    # -----------------------------------------------------------
+    def load_playlists(self):
+        if os.path.exists(self.playlists_file):
+            try:
+                with open(self.playlists_file, "r", encoding="utf-8") as f:
+                    self.playlists = json.load(f)
+                print(f"✅ Loaded playlists from {self.playlists_file}")
+            except Exception as e:
+                print(f"⚠️ Error loading playlists: {e}")
+        else:
+            print("ℹ️ No playlists file found; starting fresh.")
         self.refresh_playlist_list()
+
+    def save_playlists(self):
+        try:
+            with open(self.playlists_file, "w", encoding="utf-8") as f:
+                json.dump(self.playlists, f, indent=4)
+            print(f"💾 Playlists saved to {self.playlists_file}")
+        except Exception as e:
+            print(f"⚠️ Error saving playlists: {e}")
 
     def refresh_playlist_list(self):
         self.playlist_list.clear()
-        for f in os.listdir(self.playlists_dir):
-            if f.endswith(".json"):
-                self.playlist_list.addItem(f.replace(".json", ""))
+        for name in sorted(self.playlists.keys()):
+            self.playlist_list.addItem(name)
 
-    def save_playlist(self):
-        if not self.player_tab.queue:
-            QMessageBox.warning(self, "Empty Queue", "There are no songs to save.")
-            return
-
-        name, _ = QFileDialog.getSaveFileName(
-            self, "Save Playlist As", self.playlists_dir, "Playlist Files (*.json)"
-        )
-        if name:
-            if not name.endswith(".json"):
-                name += ".json"
-            with open(name, "w") as f:
-                json.dump(self.player_tab.queue, f, indent=4)
-            QMessageBox.information(self, "Saved", "Playlist saved successfully!")
-            self.refresh_playlist_list()
-
-    def load_playlist(self, item):
-        path = os.path.join(self.playlists_dir, f"{item.text()}.json")
-        if os.path.exists(path):
-            with open(path, "r") as f:
-                songs = json.load(f)
-            self.player_tab.queue = songs
-            self.player_tab.queue_list.clear()
-            for song in songs:
-                self.player_tab.queue_list.addItem(os.path.basename(song))
-            QMessageBox.information(self, "Loaded", f"Playlist '{item.text()}' loaded!")
+    # -----------------------------------------------------------
+    # Playlist Management
+    # -----------------------------------------------------------
+    def create_playlist(self):
+        name, ok = QInputDialog.getText(self, "Create Playlist", "Enter playlist name:")
+        if ok and name:
+            if name not in self.playlists:
+                self.playlists[name] = []
+                self.save_playlists()
+                self.refresh_playlist_list()
+                print(f"💾 Playlists saved successfully.")
+                self._info(f"✅ Playlist '{name}' created")
+            else:
+                self._info(f"⚠️ Playlist '{name}' already exists")
 
     def delete_playlist(self):
         selected = self.playlist_list.currentItem()
         if not selected:
+            self._info("⚠️ No playlist selected")
             return
         name = selected.text()
-        path = os.path.join(self.playlists_dir, f"{name}.json")
-        if os.path.exists(path):
-            os.remove(path)
-            QMessageBox.information(self, "Deleted", f"Playlist '{name}' deleted!")
+        if name in self.playlists:
+            del self.playlists[name]
+            self.save_playlists()
             self.refresh_playlist_list()
+            self._info(f"🗑️ Playlist '{name}' deleted")
+
+    def add_to_playlist(self, name, song_path):
+        if name not in self.playlists:
+            self.playlists[name] = []
+        if song_path not in self.playlists[name]:
+            self.playlists[name].append(song_path)
+            self.save_playlists()
+            print(f"🎶 Added '{song_path}' to playlist '{name}'")
+
+    def load_playlist_to_queue(self, item):
+        name = item.text()
+        songs = self.playlists.get(name, [])
+        if songs:
+            self.player_tab.queue = list(songs)
+            self.player_tab.queue_list.clear()
+            for song in songs:
+                self.player_tab.queue_list.addItem(os.path.basename(song))
+            self.player_tab.current_index = -1  # prevent auto-play
+            self.player_tab.is_paused = False
+            print(f"🎵 Playlist '{name}' loaded into queue.")
+            self._info(f"🎵 Playlist '{name}' loaded into queue")
+        else:
+            self._info(f"⚠️ Playlist '{name}' is empty")
+
+    # -----------------------------------------------------------
+    # Info message helper (persistent)
+    # -----------------------------------------------------------
+    def _info(self, message: str):
+        """Display message persistently at top of playlist tab."""
+        self.info_label.setText(message)
