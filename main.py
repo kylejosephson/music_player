@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget
 from player_tab import PlayerTab
 from playlist_tab import PlaylistTab
 from library_tab import LibraryTab
+from sync_tab import SyncTab
 
 
 class MainWindow(QMainWindow):
@@ -30,6 +31,9 @@ class MainWindow(QMainWindow):
             add_to_playlist_queue_callback=self.playlist_tab.add_to_playlist_queue
         )
         self.tabs.addTab(self.library_tab, "📚 Library")
+
+        self.sync_tab = SyncTab()
+        self.tabs.addTab(self.sync_tab, "☁️ Sync")
 
 
 if __name__ == "__main__":
