@@ -91,6 +91,7 @@ class PlayerTab(QWidget):
         self.last_pos = 0.0
         self.seek_offset = 0.0
         self.last_update_time = QTime.currentTime()
+        self.playback_finished = False  # NEW FLAG to prevent looping log
 
         # --- Timer for progress ---
         self.timer = QTimer()
@@ -110,10 +111,7 @@ class PlayerTab(QWidget):
             print(f"🎶 Added to queue: {os.path.basename(path)}")
 
     def clear_queue(self):
-        # Stop any music currently playing
         pygame.mixer.music.stop()
-
-        # Clear all queue data
         self.queue.clear()
         self.queue_list.clear()
         self.current_index = -1
@@ -121,13 +119,13 @@ class PlayerTab(QWidget):
         self.last_pos = 0.0
         self.seek_offset = 0.0
         self.is_paused = False
+        self.playback_finished = False  # reset flag
 
-        # Reset display
         self.song_label.setText("🧹 Queue cleared successfully.")
         self.time_label.setText("0:00 / 0:00")
         self.progress_bar.setValue(0)
         print("🧹 Queue cleared successfully and playback stopped.")
-        
+
     # -------------------------------------------------------------
     #                       PLAYBACK CONTROL
     # -------------------------------------------------------------
@@ -137,20 +135,43 @@ class PlayerTab(QWidget):
 
     def play_song(self, index):
         if 0 <= index < len(self.queue):
+            self.playback_finished = False
             song_path = self.queue[index]
-            pygame.mixer.music.load(song_path)
-            pygame.mixer.music.play()
+
+            # --- SAFETY CHECK ---
+            if not os.path.exists(song_path):
+                self.song_label.setText(f"⚠️ File missing: {os.path.basename(song_path)}")
+                print(f"⚠️ [Error] File not found: {song_path}")
+                return
+
+            try:
+                pygame.mixer.music.load(song_path)
+                pygame.mixer.music.play()
+            except pygame.error as e:
+                self.song_label.setText(f"⚠️ Cannot play: {os.path.basename(song_path)}")
+                print(f"⚠️ [Error loading track] {song_path} → {e}")
+                return
+            except Exception as e:
+                self.song_label.setText(f"⚠️ Error playing: {os.path.basename(song_path)}")
+                print(f"⚠️ [Unknown playback error] {song_path} → {e}")
+                return
+
+            # --- Continue normal setup if successful ---
             self.current_index = index
             self.is_paused = False
-
             self.song_label.setText(f"🎵 Now Playing: {os.path.basename(song_path)}")
             self.progress_bar.setValue(0)
             self.last_update_time = QTime.currentTime()
             self.last_pos = 0.0
             self.seek_offset = 0.0
 
-            audio = MP3(song_path)
-            self.total_length = audio.info.length
+            try:
+                audio = MP3(song_path)
+                self.total_length = audio.info.length
+            except Exception as e:
+                self.total_length = 0
+                print(f"⚠️ [Mutagen] Could not read length for {song_path}: {e}")
+
             self.time_label.setText(f"0:00 / {self.format_time(self.total_length)}")
 
     def play_pause(self):
@@ -171,6 +192,7 @@ class PlayerTab(QWidget):
             self.play_song(self.current_index + 1)
         elif self.current_index + 1 >= len(self.queue):
             pygame.mixer.music.stop()
+            self.playback_finished = True  # prevent repeat loop
             self.song_label.setText("🎵 End of queue reached — stopping playback.")
             print("🎵 End of queue reached — stopping playback.")
 
@@ -182,7 +204,7 @@ class PlayerTab(QWidget):
     #                       PROGRESS & SEEK
     # -------------------------------------------------------------
     def update_progress(self):
-        if self.total_length <= 0:
+        if self.total_length <= 0 or self.playback_finished:
             return
 
         pos_ms = pygame.mixer.music.get_pos()
@@ -201,7 +223,8 @@ class PlayerTab(QWidget):
             f"{self.format_time(smoothed_pos)} / {self.format_time(self.total_length)}"
         )
 
-        if not pygame.mixer.music.get_busy() and not self.is_paused:
+        # only trigger next track once when playback ends
+        if not pygame.mixer.music.get_busy() and not self.is_paused and not self.playback_finished:
             self.play_next()
 
     def eventFilter(self, source, event):
@@ -212,6 +235,7 @@ class PlayerTab(QWidget):
                 pygame.mixer.music.play(start=new_time)
                 self.seek_offset = new_time
                 self.is_paused = False
+                self.playback_finished = False
                 self.last_update_time = QTime.currentTime()
                 self.last_pos = new_time
                 self.progress_bar.setValue(int(ratio * 100))
