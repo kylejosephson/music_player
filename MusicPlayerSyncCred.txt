@@ -1,9 +1,0 @@
-Display name:MusicPlayerSync
-
-Application (client) ID:66c23531-a11d-4108-b037-f7547b9ea2ee
-
-Object ID:577a2854-0e56-46d0-b171-d5e330f80dce
-
-Directory (tenant) ID:7c43e663-6194-4af7-96de-957833a12727
-
-Supported account types:All Microsoft account users
