@@ -4,7 +4,7 @@ import threading
 from datetime import datetime
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton,
-    QHBoxLayout, QProgressBar, QApplication
+    QHBoxLayout, QProgressBar, QApplication, QFrame
 )
 from PyQt5.QtCore import Qt, QTimer
 
@@ -27,17 +27,17 @@ class SyncTab(QWidget):
         os.makedirs(self.onedrive_data_dir, exist_ok=True)
         self.last_playlist_timestamp = None
 
-        # --- Layout setup ---
+        # --- Main Layout ---
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-        # Header + status
+        # Header
         self.status_label = QLabel("☁️ OneDrive Sync — Ready")
         self.status_label.setAlignment(Qt.AlignCenter)
-        self.status_label.setStyleSheet("font-size: 16px; font-weight: bold; color: black;")
+        self.status_label.setStyleSheet("font-size: 16px; font-weight: bold; color: #00FF66;")
         main_layout.addWidget(self.status_label)
 
-        # Last sync label
+        # Last sync
         self.last_sync_label = QLabel("Last synced: never")
         self.last_sync_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(self.last_sync_label)
@@ -47,12 +47,15 @@ class SyncTab(QWidget):
         self.progress.hide()
         main_layout.addWidget(self.progress)
 
-        # --- Split layout (side-by-side panels) ---
+        # --- Split Layout ---
         split_layout = QHBoxLayout()
         main_layout.addLayout(split_layout)
 
-        # Left: playlists
+        # ========== LEFT (Playlists) ==========
+        left_frame = QFrame()
         left_layout = QVBoxLayout()
+        left_frame.setLayout(left_layout)
+
         self.playlist_label = QLabel("📜 Playlist Status")
         self.playlist_label.setAlignment(Qt.AlignCenter)
         left_layout.addWidget(self.playlist_label)
@@ -60,22 +63,23 @@ class SyncTab(QWidget):
         self.playlist_list = QListWidget()
         left_layout.addWidget(self.playlist_list)
 
+        # Playlist button row (side-by-side)
+        playlist_button_row = QHBoxLayout()
         self.playlist_sync_btn = QPushButton("☁️ Sync Playlists")
         self.playlist_sync_btn.clicked.connect(self.sync_playlists)
-        left_layout.addWidget(self.playlist_sync_btn)
 
-        # Force Refresh Playlists button (bottom left)
-        self.force_refresh_btn = QPushButton("Force Refresh Playlists")
-        self.force_refresh_btn.setFixedWidth(180)
-        self.force_refresh_btn.setFixedHeight(26)
-        self.force_refresh_btn.setStyleSheet(
-            "font-size: 11px; color: #333; background-color: #e6e6e6;"
-        )
+        self.force_refresh_btn = QPushButton("🔄 Force Refresh Playlists")
         self.force_refresh_btn.clicked.connect(self.force_refresh_playlists)
-        left_layout.addWidget(self.force_refresh_btn, alignment=Qt.AlignLeft)
 
-        # Right: songs
+        playlist_button_row.addWidget(self.playlist_sync_btn)
+        playlist_button_row.addWidget(self.force_refresh_btn)
+        left_layout.addLayout(playlist_button_row)
+
+        # ========== RIGHT (Songs) ==========
+        right_frame = QFrame()
         right_layout = QVBoxLayout()
+        right_frame.setLayout(right_layout)
+
         self.song_label = QLabel("🎵 Song Status")
         self.song_label.setAlignment(Qt.AlignCenter)
         right_layout.addWidget(self.song_label)
@@ -83,19 +87,24 @@ class SyncTab(QWidget):
         self.song_list = QListWidget()
         right_layout.addWidget(self.song_list)
 
+        # Centered sync songs button
+        song_button_row = QHBoxLayout()
+        song_button_row.addStretch()
         self.song_sync_btn = QPushButton("☁️ Sync Songs")
         self.song_sync_btn.clicked.connect(self.sync_songs)
-        right_layout.addWidget(self.song_sync_btn)
+        song_button_row.addWidget(self.song_sync_btn)
+        song_button_row.addStretch()
+        right_layout.addLayout(song_button_row)
 
-        split_layout.addLayout(left_layout)
-        split_layout.addLayout(right_layout)
+        # --- Add frames to split layout ---
+        split_layout.addWidget(left_frame)
+        split_layout.addWidget(right_frame)
 
-        # --- Timer: check for playlist updates every 3s ---
+        # Timer
         self.timer = QTimer()
         self.timer.timeout.connect(self.check_playlist_changes)
         self.timer.start(3000)
 
-        # Initial scan
         self.refresh_status()
 
     # --------------------------------------------------
@@ -111,11 +120,9 @@ class SyncTab(QWidget):
     def refresh_status(self):
         """Rescan playlists and songs, showing detailed differences."""
         import json
-
         self.status_label.setText("🔍 Scanning...")
         QApplication.processEvents()
 
-        # Always update the stored timestamp immediately so manual refresh works
         if os.path.exists(self.local_playlist_path):
             self.last_playlist_timestamp = os.path.getmtime(self.local_playlist_path)
         else:
@@ -135,14 +142,12 @@ class SyncTab(QWidget):
         elif cloud_exists and not local_exists:
             self.playlist_list.addItem("⬇ Download → playlists.json (missing local copy)")
         else:
-            # Both exist — compare their contents
             try:
                 with open(self.local_playlist_path, "r", encoding="utf-8") as f:
                     local_data = json.load(f)
                 with open(self.cloud_playlist_path, "r", encoding="utf-8") as f:
                     cloud_data = json.load(f)
 
-                # Handle nested structures automatically
                 if isinstance(local_data, dict) and "playlists" in local_data:
                     local_data = local_data["playlists"]
                 if isinstance(cloud_data, dict) and "playlists" in cloud_data:
@@ -185,7 +190,7 @@ class SyncTab(QWidget):
             except Exception as e:
                 self.playlist_list.addItem(f"⚠️ Error reading playlists: {e}")
 
-        # --- SONG COMPARISON (unchanged) ---
+        # --- SONG COMPARISON ---
         local_songs = self._get_songs(self.music_dir)
         cloud_songs = self._get_songs(self.onedrive_music_dir)
 
