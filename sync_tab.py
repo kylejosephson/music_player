@@ -18,11 +18,19 @@ class SyncTab(QWidget):
     ):
         super().__init__()
 
+        # --- Detect the project root dynamically ---
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.abspath(base_dir)
+
+        # --- Define paths safely relative to project root ---
         self.music_dir = music_dir
         self.onedrive_music_dir = onedrive_music_dir
         self.onedrive_data_dir = onedrive_data_dir
-        self.local_playlist_path = os.path.join(os.getcwd(), "playlists.json")
-        self.cloud_playlist_path = os.path.join(self.onedrive_data_dir, "playlists.json")
+
+        self.local_playlist_path = os.path.join(project_root, "playlists.json")
+        self.local_library_path = os.path.join(project_root, "library_cache.json")
+        self.local_metadata_path = os.path.join(project_root, "music_metadata.json")
+        self.local_artwork_dir = os.path.join(project_root, "cache", "artwork")
 
         os.makedirs(self.onedrive_data_dir, exist_ok=True)
         self.last_playlist_timestamp = None
@@ -65,14 +73,18 @@ class SyncTab(QWidget):
 
         # Playlist button row (side-by-side)
         playlist_button_row = QHBoxLayout()
-        self.playlist_sync_btn = QPushButton("☁️ Sync Playlists")
+        self.playlist_sync_btn = QPushButton("☁️ Backup Playlists")
         self.playlist_sync_btn.clicked.connect(self.sync_playlists)
 
-        self.force_refresh_btn = QPushButton("🔄 Force Refresh Playlists")
+        self.force_refresh_btn = QPushButton("🔄 Force Refresh")
         self.force_refresh_btn.clicked.connect(self.force_refresh_playlists)
+
+        self.backup_now_btn = QPushButton("🧠 Backup Now")
+        self.backup_now_btn.clicked.connect(self.manual_backup_now)
 
         playlist_button_row.addWidget(self.playlist_sync_btn)
         playlist_button_row.addWidget(self.force_refresh_btn)
+        playlist_button_row.addWidget(self.backup_now_btn)
         left_layout.addLayout(playlist_button_row)
 
         # ========== RIGHT (Songs) ==========
@@ -118,79 +130,71 @@ class SyncTab(QWidget):
 
     # --------------------------------------------------
     def refresh_status(self):
-        """Rescan playlists and songs, showing detailed differences."""
+        """Compare local playlists.json with latest backup and show sync status."""
         import json
         self.status_label.setText("🔍 Scanning...")
         QApplication.processEvents()
-
-        if os.path.exists(self.local_playlist_path):
-            self.last_playlist_timestamp = os.path.getmtime(self.local_playlist_path)
-        else:
-            self.last_playlist_timestamp = None
 
         self.playlist_list.clear()
         self.song_list.clear()
 
         local_exists = os.path.exists(self.local_playlist_path)
-        cloud_exists = os.path.exists(self.cloud_playlist_path)
+        latest_backup = self._find_latest_backup(prefix="playlists_backup_")
 
-        # --- PLAYLIST COMPARISON ---
-        if not local_exists and not cloud_exists:
-            self.playlist_list.addItem("⚠️ No playlists found")
-        elif local_exists and not cloud_exists:
-            self.playlist_list.addItem("⬆ Upload → playlists.json (no cloud copy yet)")
-        elif cloud_exists and not local_exists:
-            self.playlist_list.addItem("⬇ Download → playlists.json (missing local copy)")
+        # --- PLAYLIST STATUS ---
+        if not local_exists and not latest_backup:
+            self.playlist_list.addItem("⚠️ No local playlist or backups found.")
+        elif local_exists and not latest_backup:
+            self.playlist_list.addItem("⬆ Backup needed → No playlist backups yet.")
+        elif latest_backup and not local_exists:
+            self.playlist_list.addItem(f"⬇ Restore → Missing local playlists.json (latest backup: {latest_backup})")
         else:
+            # Compare local playlists.json with latest backup
             try:
-                with open(self.local_playlist_path, "r", encoding="utf-8") as f:
+                local_path = self.local_playlist_path
+                backup_path = os.path.join(self.onedrive_data_dir, latest_backup)
+
+                with open(local_path, "r", encoding="utf-8") as f:
                     local_data = json.load(f)
-                with open(self.cloud_playlist_path, "r", encoding="utf-8") as f:
-                    cloud_data = json.load(f)
+                with open(backup_path, "r", encoding="utf-8") as f:
+                    backup_data = json.load(f)
 
                 if isinstance(local_data, dict) and "playlists" in local_data:
                     local_data = local_data["playlists"]
-                if isinstance(cloud_data, dict) and "playlists" in cloud_data:
-                    cloud_data = cloud_data["playlists"]
-
-                if not isinstance(local_data, dict) or not isinstance(cloud_data, dict):
-                    self.playlist_list.addItem("⚠️ Invalid playlist format detected.")
-                    return
+                if isinstance(backup_data, dict) and "playlists" in backup_data:
+                    backup_data = backup_data["playlists"]
 
                 local_names = set(local_data.keys())
-                cloud_names = set(cloud_data.keys())
+                backup_names = set(backup_data.keys())
 
-                missing_in_cloud = local_names - cloud_names
-                missing_in_local = cloud_names - local_names
-
+                missing_in_backup = local_names - backup_names
+                missing_in_local = backup_names - local_names
                 changed_playlists = [
-                    name for name in (local_names & cloud_names)
-                    if local_data[name] != cloud_data[name]
+                    name for name in (local_names & backup_names)
+                    if local_data[name] != backup_data[name]
                 ]
 
-                total_playlists = len(local_names.union(cloud_names))
-                out_of_sync_count = len(missing_in_cloud) + len(missing_in_local) + len(changed_playlists)
+                total_playlists = len(local_names.union(backup_names))
+                out_of_sync_count = len(missing_in_backup) + len(missing_in_local) + len(changed_playlists)
 
                 if out_of_sync_count == 0:
-                    self.playlist_list.addItem("✅ Playlists synced (timestamps & contents match)")
-                    self.playlist_list.addItem(f"All {total_playlists} playlists already synced.")
+                    self.playlist_list.addItem(f"✅ All {total_playlists} playlists match latest backup.")
                 else:
-                    if missing_in_cloud:
-                        for name in sorted(missing_in_cloud):
-                            self.playlist_list.addItem(f"⬆ Upload → New playlist: {name}")
+                    if missing_in_backup:
+                        for name in sorted(missing_in_backup):
+                            self.playlist_list.addItem(f"⬆ Needs backup → New playlist: {name}")
                     if missing_in_local:
                         for name in sorted(missing_in_local):
-                            self.playlist_list.addItem(f"⬇ Download → Missing locally: {name}")
+                            self.playlist_list.addItem(f"⬇ Missing locally → {name}")
                     if changed_playlists:
                         for name in sorted(changed_playlists):
                             self.playlist_list.addItem(f"⚠️ Modified → {name}")
-
                     self.playlist_list.addItem(f"Total out of sync: {out_of_sync_count} of {total_playlists}")
 
             except Exception as e:
-                self.playlist_list.addItem(f"⚠️ Error reading playlists: {e}")
+                self.playlist_list.addItem(f"⚠️ Error comparing playlists: {e}")
 
-        # --- SONG COMPARISON ---
+        # --- SONG STATUS ---
         local_songs = self._get_songs(self.music_dir)
         cloud_songs = self._get_songs(self.onedrive_music_dir)
 
@@ -208,6 +212,17 @@ class SyncTab(QWidget):
         self.status_label.setText("☁️ OneDrive Sync — Ready")
 
     # --------------------------------------------------
+    def _find_latest_backup(self, prefix):
+        """Find the latest backup filename matching a prefix."""
+        backups = [
+            f for f in os.listdir(self.onedrive_data_dir)
+            if f.startswith(prefix) and f.endswith(".json")
+        ]
+        if not backups:
+            return None
+        return max(backups, key=lambda f: os.path.getmtime(os.path.join(self.onedrive_data_dir, f)))
+
+    # --------------------------------------------------
     def _get_songs(self, path):
         songs = []
         if not os.path.exists(path):
@@ -220,25 +235,51 @@ class SyncTab(QWidget):
 
     # --------------------------------------------------
     def sync_playlists(self):
-        threading.Thread(target=self._sync_playlists_thread, daemon=True).start()
+        """Backup playlists manually (no direct cloud copy)."""
+        threading.Thread(target=self._backup_playlists_thread, daemon=True).start()
 
-    def _sync_playlists_thread(self):
-        self._show_progress("Uploading playlists.json...")
-        local_file = self.local_playlist_path
-        cloud_file = self.cloud_playlist_path
-
-        if os.path.exists(local_file):
-            os.makedirs(os.path.dirname(cloud_file), exist_ok=True)
-            shutil.copy2(local_file, cloud_file)
-            self.status_label.setText("✅ Uploaded playlist to OneDrive.")
-            self.last_sync_label.setText(
-                f"Last synced: {datetime.now().strftime('%Y-%m-%d %I:%M %p')}"
-            )
+    def _backup_playlists_thread(self):
+        self._show_progress("Backing up playlists...")
+        if os.path.exists(self.local_playlist_path):
+            timestamp = datetime.now().strftime("%Y-%m-%d_%I-%M-%p")
+            dest_file = os.path.join(self.onedrive_data_dir, f"playlists_backup_{timestamp}.json")
+            shutil.copy2(self.local_playlist_path, dest_file)
+            self.status_label.setText(f"✅ Playlist backed up as {os.path.basename(dest_file)}")
+            self.backup_all_data()  # do full data backup afterward
         else:
             self.status_label.setText("⚠️ No local playlists.json found.")
-
         self._hide_progress()
         self.refresh_status()
+
+    # --------------------------------------------------
+    def backup_all_data(self):
+        """Backup library, metadata, and artwork with timestamps."""
+        timestamp = datetime.now().strftime("%Y-%m-%d_%I-%M-%p")
+        backup_dir = self.onedrive_data_dir
+        os.makedirs(backup_dir, exist_ok=True)
+
+        files_to_backup = {
+            self.local_library_path: f"library_backup_{timestamp}.json",
+            self.local_metadata_path: f"metadata_backup_{timestamp}.json",
+        }
+
+        backed_up = []
+        for src, dst in files_to_backup.items():
+            if os.path.exists(src):
+                shutil.copy2(src, os.path.join(backup_dir, dst))
+                backed_up.append(os.path.basename(dst))
+
+        # Artwork backup
+        if os.path.exists(self.local_artwork_dir):
+            art_dest = os.path.join(backup_dir, f"artwork_backup_{timestamp}")
+            shutil.copytree(self.local_artwork_dir, art_dest, dirs_exist_ok=True)
+            backed_up.append("artwork folder")
+
+        # Status feedback
+        if backed_up:
+            self.status_label.setText(f"💾 Backup complete: {', '.join(backed_up)}")
+        else:
+            self.status_label.setText("⚠️ No data files found to backup.")
 
     # --------------------------------------------------
     def sync_songs(self):
@@ -271,7 +312,8 @@ class SyncTab(QWidget):
             done += 1
             self.progress.setValue(int(done / max(total, 1) * 100))
 
-        self.status_label.setText("✅ Sync complete.")
+        self.status_label.setText("✅ Song sync complete.")
+        self.backup_all_data()
         self.last_sync_label.setText(
             f"Last synced: {datetime.now().strftime('%Y-%m-%d %I:%M %p')}"
         )
@@ -296,3 +338,10 @@ class SyncTab(QWidget):
     def _hide_progress(self):
         self.progress.hide()
         self.progress.setValue(0)
+
+    def manual_backup_now(self):
+        """Manually trigger a full backup."""
+        self.status_label.setText("💾 Backing up data now...")
+        QApplication.processEvents()
+        self.backup_all_data()
+        QTimer.singleShot(2500, lambda: self.status_label.setText("☁️ OneDrive Sync — Ready"))
