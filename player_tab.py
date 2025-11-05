@@ -1,11 +1,13 @@
 import os
+import json
 import pygame
 from mutagen.mp3 import MP3
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QLabel, QProgressBar, QFileDialog
+    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QLabel, QProgressBar,
+    QGraphicsDropShadowEffect, QFrame
 )
 from PyQt5.QtCore import QTimer, Qt, QEvent, QTime
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPixmap, QColor
 
 
 class PlayerTab(QWidget):
@@ -13,6 +15,11 @@ class PlayerTab(QWidget):
         super().__init__()
         pygame.mixer.init()
 
+        # -------- Load metadata (for album art + tags) --------
+        self.metadata_path = os.path.join(os.getcwd(), "music_metadata.json")
+        self.metadata = self.load_metadata()
+
+        # -------- Main Layout --------
         self.layout = QHBoxLayout(self)
 
         # ---------------- LEFT: PLAYER AREA ----------------
@@ -55,18 +62,68 @@ class PlayerTab(QWidget):
         self.time_label.setAlignment(Qt.AlignCenter)
         self.player_layout.addWidget(self.time_label)
 
+        # -------- “Now Playing Info” Section --------
+        info_frame = QFrame()
+        info_layout = QHBoxLayout()
+        info_layout.setContentsMargins(40, 70, 0, 0)
+        info_layout.setSpacing(40)  # ✅ add horizontal space between artwork and info
+        info_frame.setLayout(info_layout)
+        self.player_layout.addWidget(info_frame)
+
+        # Album Art
+        self.album_art_label = QLabel()
+        self.album_art_label.setFixedSize(200, 200)
+        self.album_art_label.setStyleSheet("background-color: #000; border-radius: 10px;")
+        self.set_album_art(None)
+
+        # Glow Effect
+        glow = QGraphicsDropShadowEffect()
+        glow.setBlurRadius(30)
+        glow.setColor(QColor("#00FF66"))
+        glow.setOffset(0, 0)
+        self.album_art_label.setGraphicsEffect(glow)
+        info_layout.addWidget(self.album_art_label, alignment=Qt.AlignTop)
+
+        # Metadata (right side)
+        self.metadata_layout = QVBoxLayout()
+        self.metadata_layout.setSpacing(6)  # tighter vertical spacing
+        info_layout.addLayout(self.metadata_layout)
+
+        font_key = QFont("Consolas", 10)
+        font_value = QFont("Consolas", 10, QFont.Bold)
+
+        self.labels = {}
+        fields = ["Title", "Artist", "Album", "Year", "Genre"]
+        for field in fields:
+            row = QHBoxLayout()
+            row.setSpacing(8)  # closer key/value
+            key_label = QLabel(f"{field}:")
+            key_label.setFont(font_key)
+            # dimmer key
+            key_label.setStyleSheet("color: #00CC44;")
+            val_label = QLabel("N/A")
+            val_label.setFont(font_value)
+            # brighter value (slightly more than the standard matrix green)
+            val_label.setStyleSheet("color: #00FF88;")
+            self.labels[field.lower()] = val_label
+            row.addWidget(key_label)
+            row.addWidget(val_label)
+            row.addStretch()
+            self.metadata_layout.addLayout(row)
+
+        self.metadata_layout.addStretch()
+
+        # 🔧 IMPORTANT: add the left player panel to the main layout
         self.layout.addLayout(self.player_layout, stretch=3)
 
         # ---------------- RIGHT: QUEUE AREA ----------------
         self.queue_layout = QVBoxLayout()
         self.queue_layout.setAlignment(Qt.AlignTop)
 
-        # Queue list
         self.queue_list = QListWidget()
         self.queue_list.itemDoubleClicked.connect(self.play_selected_song)
         self.queue_layout.addWidget(self.queue_list)
 
-        # Previous / Clear / Next controls
         controls_layout = QHBoxLayout()
         self.prev_button = QPushButton("Previous")
         self.prev_button.clicked.connect(self.play_previous)
@@ -91,7 +148,7 @@ class PlayerTab(QWidget):
         self.last_pos = 0.0
         self.seek_offset = 0.0
         self.last_update_time = QTime.currentTime()
-        self.playback_finished = False  # NEW FLAG to prevent looping log
+        self.playback_finished = False
 
         # --- Timer for progress ---
         self.timer = QTimer()
@@ -102,7 +159,23 @@ class PlayerTab(QWidget):
         self.progress_bar.installEventFilter(self)
 
     # -------------------------------------------------------------
-    #                       QUEUE MANAGEMENT
+    def load_metadata(self):
+        """Load music_metadata.json into memory."""
+        try:
+            with open(self.metadata_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+
+    def set_album_art(self, artwork_path):
+        """Set album art image or default."""
+        if artwork_path and os.path.exists(artwork_path):
+            pixmap = QPixmap(artwork_path).scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        else:
+            pixmap = QPixmap(200, 200)
+            pixmap.fill(QColor("#111"))
+        self.album_art_label.setPixmap(pixmap)
+
     # -------------------------------------------------------------
     def add_song_to_queue(self, path: str):
         if path and path not in self.queue:
@@ -119,15 +192,17 @@ class PlayerTab(QWidget):
         self.last_pos = 0.0
         self.seek_offset = 0.0
         self.is_paused = False
-        self.playback_finished = False  # reset flag
+        self.playback_finished = False
 
         self.song_label.setText("🧹 Queue cleared successfully.")
         self.time_label.setText("0:00 / 0:00")
         self.progress_bar.setValue(0)
-        print("🧹 Queue cleared successfully and playback stopped.")
 
-    # -------------------------------------------------------------
-    #                       PLAYBACK CONTROL
+        # Reset info area
+        self.set_album_art(None)
+        for field in self.labels.values():
+            field.setText("N/A")
+
     # -------------------------------------------------------------
     def play_selected_song(self, item):
         index = self.queue_list.row(item)
@@ -138,25 +213,18 @@ class PlayerTab(QWidget):
             self.playback_finished = False
             song_path = self.queue[index]
 
-            # --- SAFETY CHECK ---
             if not os.path.exists(song_path):
                 self.song_label.setText(f"⚠️ File missing: {os.path.basename(song_path)}")
-                print(f"⚠️ [Error] File not found: {song_path}")
                 return
 
             try:
                 pygame.mixer.music.load(song_path)
                 pygame.mixer.music.play()
-            except pygame.error as e:
-                self.song_label.setText(f"⚠️ Cannot play: {os.path.basename(song_path)}")
-                print(f"⚠️ [Error loading track] {song_path} → {e}")
-                return
             except Exception as e:
                 self.song_label.setText(f"⚠️ Error playing: {os.path.basename(song_path)}")
-                print(f"⚠️ [Unknown playback error] {song_path} → {e}")
+                print(f"⚠️ {e}")
                 return
 
-            # --- Continue normal setup if successful ---
             self.current_index = index
             self.is_paused = False
             self.song_label.setText(f"🎵 Now Playing: {os.path.basename(song_path)}")
@@ -165,15 +233,39 @@ class PlayerTab(QWidget):
             self.last_pos = 0.0
             self.seek_offset = 0.0
 
+            # --- Duration ---
             try:
                 audio = MP3(song_path)
                 self.total_length = audio.info.length
-            except Exception as e:
+            except Exception:
                 self.total_length = 0
-                print(f"⚠️ [Mutagen] Could not read length for {song_path}: {e}")
-
             self.time_label.setText(f"0:00 / {self.format_time(self.total_length)}")
 
+            # --- Update Metadata + Art ---
+            self.update_metadata_display(song_path)
+
+    def update_metadata_display(self, song_path):
+        """Display metadata and album art from JSON."""
+        entry = self.metadata.get(song_path)
+        if entry:
+            self.labels["title"].setText(entry.get("title", "N/A"))
+            self.labels["artist"].setText(entry.get("album_artist", "N/A"))
+            self.labels["album"].setText(entry.get("album", "N/A"))
+            self.labels["year"].setText(entry.get("year", "N/A"))
+            self.labels["genre"].setText(entry.get("genre", "N/A"))
+
+            art_path = entry.get("artwork")
+            if art_path:
+                full_path = os.path.join(os.getcwd(), art_path)
+                self.set_album_art(full_path)
+            else:
+                self.set_album_art(None)
+        else:
+            for field in self.labels.values():
+                field.setText("N/A")
+            self.set_album_art(None)
+
+    # -------------------------------------------------------------
     def play_pause(self):
         if not self.queue:
             return
@@ -192,21 +284,17 @@ class PlayerTab(QWidget):
             self.play_song(self.current_index + 1)
         elif self.current_index + 1 >= len(self.queue):
             pygame.mixer.music.stop()
-            self.playback_finished = True  # prevent repeat loop
+            self.playback_finished = True
             self.song_label.setText("🎵 End of queue reached — stopping playback.")
-            print("🎵 End of queue reached — stopping playback.")
 
     def play_previous(self):
         if self.queue and self.current_index > 0:
             self.play_song(self.current_index - 1)
 
     # -------------------------------------------------------------
-    #                       PROGRESS & SEEK
-    # -------------------------------------------------------------
     def update_progress(self):
         if self.total_length <= 0 or self.playback_finished:
             return
-
         pos_ms = pygame.mixer.music.get_pos()
         elapsed_ms = self.last_update_time.msecsTo(QTime.currentTime())
         self.last_update_time = QTime.currentTime()
@@ -223,7 +311,6 @@ class PlayerTab(QWidget):
             f"{self.format_time(smoothed_pos)} / {self.format_time(self.total_length)}"
         )
 
-        # only trigger next track once when playback ends
         if not pygame.mixer.music.get_busy() and not self.is_paused and not self.playback_finished:
             self.play_next()
 
