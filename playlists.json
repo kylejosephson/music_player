@@ -1,40 +1,25 @@
 {
-    "Test 2": [
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\02 38 Special - Hold On Loosely.mp3",
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\04 38 Special - If I'd Been The One.mp3",
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\05 38 Special - Caught Up In You.mp3"
-    ],
-    "Test 6": [
-        "C:\\Users\\kylej\\Music\\Journey\\Greatest Hits Live\\01 Don\u2019t Stop Believin\u2019.mp3",
-        "C:\\Users\\kylej\\Music\\Journey\\Greatest Hits Live\\02 Separate Ways (Worlds Apart).mp3",
-        "C:\\Users\\kylej\\Music\\Journey\\Greatest Hits Live\\07 Any Way You Want It.mp3"
-    ],
-    "Test 7": [
-        "C:\\Users\\kylej\\Music\\Fleetwood Mac\\Greatest Hits\\01 - Rhiannon.mp3",
-        "C:\\Users\\kylej\\Music\\Fleetwood Mac\\Greatest Hits\\02 - Don't Stop.mp3",
-        "C:\\Users\\kylej\\Music\\Fleetwood Mac\\Greatest Hits\\03 - Go Your Own Way.mp3",
-        "C:\\Users\\kylej\\Music\\Fleetwood Mac\\Greatest Hits\\04 - Hold Me.mp3"
-    ],
-    "X-Mas Test": [
-        "C:\\Users\\kylej\\Music\\Various Artists\\Christmas Favorites\\09 Sleigh Ride.mp3",
-        "C:\\Users\\kylej\\Music\\Various Artists\\Christmas Favorites\\10 Angels We Have Heard on High.mp3",
-        "C:\\Users\\kylej\\Music\\Various Artists\\Christmas Favorites\\07 White Christmas.mp3"
-    ],
-    "Test 24": [
-        "C:\\Users\\kylej\\Music\\Rush\\A Farewell to Kings\\04 Rush - Cinderella Man.mp3",
-        "C:\\Users\\kylej\\Music\\Rush\\A Farewell to Kings\\06 Rush - Cygnus X-1.mp3",
-        "C:\\Users\\kylej\\Music\\Rush\\A Farewell to Kings\\02 Rush - Xanadu.mp3"
-    ],
-    "Test 25": [
-        "C:\\Users\\kylej\\Music\\Rush\\Test for Echo\\03 Rush - Half the World.mp3",
-        "C:\\Users\\kylej\\Music\\Rush\\Test for Echo\\04 Rush - The Color of Right.mp3",
+    "Hard Rock 1": [
+        "C:\\Users\\kylej\\Music\\Iron Maiden\\Live After Death (1998 Remaster)\\10 - Hallowed Be Thy Name (Live at Long Beach Arena) [1998 Remaster].mp3",
+        "C:\\Users\\kylej\\Music\\Metallica\\Kill Them All\\02 - The Four Horsemen (Remastered).mp3",
+        "C:\\Users\\kylej\\Music\\Quiet Riot\\Metal Health\\01 - Metal Health (Bang Your Head).mp3",
+        "C:\\Users\\kylej\\Music\\Godsmack\\Awake\\02 - Awake.mp3",
+        "C:\\Users\\kylej\\Music\\Bush\\07 - Machinehead.mp3",
+        "C:\\Users\\kylej\\Music\\Rainbow\\The Very Best Of Rainbow\\07 Rainbow - Gates Of Babylon.mp3",
         "C:\\Users\\kylej\\Music\\L.A. Guns\\L.A. Guns\\03 - One More Reason.mp3",
-        "C:\\Users\\kylej\\Music\\3 Doors Down\\3 Doors Down-Here Without You.mp3"
+        "C:\\Users\\kylej\\Music\\Seether\\02 - Remedy.mp3",
+        "C:\\Users\\kylej\\Music\\Stone Temple Pilots\\Purple\\02 Vasoline.mp3",
+        "C:\\Users\\kylej\\Music\\Van Halen\\Live- Right Here, Right Now (Disc One)\\01 Van Halen - Poundcake.mp3",
+        "C:\\Users\\kylej\\Music\\Iron Maiden\\Live After Death (1998 Remaster)\\05 - Revelations (Live at Long Beach Arena) [1998 Remaster].mp3",
+        "C:\\Users\\kylej\\Music\\Metallica\\Kill Them All\\09 - Seek & Destroy (Remastered).mp3",
+        "C:\\Users\\kylej\\Music\\Quiet Riot\\Metal Health\\02 - Cum on Feel the Noize [Explicit].mp3",
+        "C:\\Users\\kylej\\Music\\Rainbow\\The Very Best Of Rainbow\\01 Rainbow - Man On The Silver Mountain.mp3"
     ],
-    "Test 26": [
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\02 38 Special - Hold On Loosely.mp3",
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\04 38 Special - If I'd Been The One.mp3",
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\05 38 Special - Caught Up In You.mp3",
-        "C:\\Users\\kylej\\Music\\38 Special\\Flashback\\12 38 Special - Like No Other Night.mp3"
+    "Boston Test": [
+        "C:\\Users\\kylej\\Music\\Boston\\Don't Look Back\\01 Boston - Don't Look Back.mp3",
+        "C:\\Users\\kylej\\Music\\Boston\\Don't Look Back\\02 Boston - The Journey.mp3",
+        "C:\\Users\\kylej\\Music\\Boston\\Don't Look Back\\03 Boston - It's Easy.mp3",
+        "C:\\Users\\kylej\\Music\\Boston\\Don't Look Back\\05 Boston - Feelin' Satisfied.mp3",
+        "C:\\Users\\kylej\\Music\\Boston\\Don't Look Back\\07 Boston - Used to Bad News.mp3"
     ]
 }

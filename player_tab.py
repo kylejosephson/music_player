@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QTimer, Qt, QEvent, QTime
 from PyQt5.QtGui import QFont, QPixmap, QColor
+from config import BASE_DIR
 
 
 class PlayerTab(QWidget):
@@ -16,7 +17,7 @@ class PlayerTab(QWidget):
         pygame.mixer.init()
 
         # -------- Load metadata (for album art + tags) --------
-        self.metadata_path = os.path.join(os.getcwd(), "music_metadata.json")
+        self.metadata_path = os.path.join(BASE_DIR, "music_metadata.json")
         self.metadata = self.load_metadata()
 
         # -------- Main Layout --------
@@ -256,7 +257,7 @@ class PlayerTab(QWidget):
 
             art_path = entry.get("artwork")
             if art_path:
-                full_path = os.path.join(os.getcwd(), art_path)
+                full_path = os.path.join(BASE_DIR, art_path)
                 self.set_album_art(full_path)
             else:
                 self.set_album_art(None)
