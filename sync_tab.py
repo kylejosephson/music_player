@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import (
     QHBoxLayout, QProgressBar, QApplication, QFrame
 )
 from PyQt5.QtCore import Qt, QTimer
-from config import BASE_DIR
+from config import ROAMING_DIR, LOCAL_DIR, ONEDRIVE_DATA_DIR
 
 
 class SyncTab(QWidget):
@@ -15,51 +15,50 @@ class SyncTab(QWidget):
         self,
         music_dir="C:\\Users\\kylej\\Music",
         onedrive_music_dir="C:\\Users\\kylej\\OneDrive\\Music",
-        onedrive_data_dir="C:\\Users\\kylej\\OneDrive\\MusicPlayerData"
+        onedrive_data_dir=ONEDRIVE_DATA_DIR
     ):
         super().__init__()
 
-        # --- Define local data paths (always relative to BASE_DIR) ---
+        # --- Core folders ---
         self.music_dir = music_dir
         self.onedrive_music_dir = onedrive_music_dir
         self.onedrive_data_dir = onedrive_data_dir
-
-        self.local_playlist_path = os.path.join(BASE_DIR, "playlists.json")
-        self.local_library_path = os.path.join(BASE_DIR, "library_cache.json")
-        self.local_metadata_path = os.path.join(BASE_DIR, "music_metadata.json")
-        self.local_artwork_dir = os.path.join(BASE_DIR, "cache", "artwork")
-
         os.makedirs(self.onedrive_data_dir, exist_ok=True)
+
+        # --- Local data paths ---
+        self.local_playlist_path = os.path.join(ROAMING_DIR, "playlists.json")
+        self.local_library_path = os.path.join(ROAMING_DIR, "library_cache.json")
+        self.local_metadata_path = os.path.join(ROAMING_DIR, "music_metadata.json")
+        self.local_artwork_dir = os.path.join(LOCAL_DIR, "cache", "artwork")
+
+        os.makedirs(self.local_artwork_dir, exist_ok=True)
+
         self.last_playlist_timestamp = None
 
-        # --- Main Layout ---
+        # --- UI Layout ---
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-        # Header
         self.status_label = QLabel("☁️ OneDrive Sync — Ready")
         self.status_label.setAlignment(Qt.AlignCenter)
         self.status_label.setStyleSheet("font-size: 16px; font-weight: bold; color: #00FF66;")
         main_layout.addWidget(self.status_label)
 
-        # Last sync
         self.last_sync_label = QLabel("Last synced: never")
         self.last_sync_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(self.last_sync_label)
 
-        # Progress bar
         self.progress = QProgressBar()
         self.progress.hide()
         main_layout.addWidget(self.progress)
 
-        # --- Split Layout ---
+        # --- Split layout ---
         split_layout = QHBoxLayout()
         main_layout.addLayout(split_layout)
 
-        # ========== LEFT (Playlists) ==========
+        # ========== LEFT: Playlists ==========
         left_frame = QFrame()
-        left_layout = QVBoxLayout()
-        left_frame.setLayout(left_layout)
+        left_layout = QVBoxLayout(left_frame)
 
         self.playlist_label = QLabel("📜 Playlist Status")
         self.playlist_label.setAlignment(Qt.AlignCenter)
@@ -68,7 +67,6 @@ class SyncTab(QWidget):
         self.playlist_list = QListWidget()
         left_layout.addWidget(self.playlist_list)
 
-        # Playlist button row (side-by-side)
         playlist_button_row = QHBoxLayout()
         self.playlist_sync_btn = QPushButton("☁️ Backup Playlists")
         self.playlist_sync_btn.clicked.connect(self.sync_playlists)
@@ -84,10 +82,9 @@ class SyncTab(QWidget):
         playlist_button_row.addWidget(self.backup_now_btn)
         left_layout.addLayout(playlist_button_row)
 
-        # ========== RIGHT (Songs) ==========
+        # ========== RIGHT: Songs ==========
         right_frame = QFrame()
-        right_layout = QVBoxLayout()
-        right_frame.setLayout(right_layout)
+        right_layout = QVBoxLayout(right_frame)
 
         self.song_label = QLabel("🎵 Song Status")
         self.song_label.setAlignment(Qt.AlignCenter)
@@ -96,7 +93,6 @@ class SyncTab(QWidget):
         self.song_list = QListWidget()
         right_layout.addWidget(self.song_list)
 
-        # Centered sync songs button
         song_button_row = QHBoxLayout()
         song_button_row.addStretch()
         self.song_sync_btn = QPushButton("☁️ Sync Songs")
@@ -105,11 +101,10 @@ class SyncTab(QWidget):
         song_button_row.addStretch()
         right_layout.addLayout(song_button_row)
 
-        # --- Add frames to split layout ---
         split_layout.addWidget(left_frame)
         split_layout.addWidget(right_frame)
 
-        # Timer
+        # --- Timer ---
         self.timer = QTimer()
         self.timer.timeout.connect(self.check_playlist_changes)
         self.timer.start(3000)
@@ -118,7 +113,7 @@ class SyncTab(QWidget):
 
     # --------------------------------------------------
     def check_playlist_changes(self):
-        """Detect changes to playlists.json and refresh instantly."""
+        """Detect local playlist edits and refresh instantly."""
         if os.path.exists(self.local_playlist_path):
             modified = os.path.getmtime(self.local_playlist_path)
             if self.last_playlist_timestamp is None or modified != self.last_playlist_timestamp:
@@ -127,7 +122,7 @@ class SyncTab(QWidget):
 
     # --------------------------------------------------
     def refresh_status(self):
-        """Compare local playlists.json with latest backup and show sync status."""
+        """Compare local playlists.json and OneDrive backups."""
         import json
         self.status_label.setText("🔍 Scanning...")
         QApplication.processEvents()
@@ -186,7 +181,6 @@ class SyncTab(QWidget):
                         for name in sorted(changed_playlists):
                             self.playlist_list.addItem(f"⚠️ Modified → {name}")
                     self.playlist_list.addItem(f"Total out of sync: {out_of_sync_count} of {total_playlists}")
-
             except Exception as e:
                 self.playlist_list.addItem(f"⚠️ Error comparing playlists: {e}")
 

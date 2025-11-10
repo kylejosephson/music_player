@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QTimer, Qt, QEvent, QTime
 from PyQt5.QtGui import QFont, QPixmap, QColor
-from config import BASE_DIR
+from config import ROAMING_DIR, LOCAL_DIR  # ✅ use permanent folders
 
 
 class PlayerTab(QWidget):
@@ -17,7 +17,7 @@ class PlayerTab(QWidget):
         pygame.mixer.init()
 
         # -------- Load metadata (for album art + tags) --------
-        self.metadata_path = os.path.join(BASE_DIR, "music_metadata.json")
+        self.metadata_path = os.path.join(ROAMING_DIR, "music_metadata.json")
         self.metadata = self.load_metadata()
 
         # -------- Main Layout --------
@@ -67,7 +67,7 @@ class PlayerTab(QWidget):
         info_frame = QFrame()
         info_layout = QHBoxLayout()
         info_layout.setContentsMargins(40, 70, 0, 0)
-        info_layout.setSpacing(40)  # ✅ add horizontal space between artwork and info
+        info_layout.setSpacing(40)
         info_frame.setLayout(info_layout)
         self.player_layout.addWidget(info_frame)
 
@@ -87,7 +87,7 @@ class PlayerTab(QWidget):
 
         # Metadata (right side)
         self.metadata_layout = QVBoxLayout()
-        self.metadata_layout.setSpacing(6)  # tighter vertical spacing
+        self.metadata_layout.setSpacing(6)
         info_layout.addLayout(self.metadata_layout)
 
         font_key = QFont("Consolas", 10)
@@ -97,14 +97,12 @@ class PlayerTab(QWidget):
         fields = ["Title", "Artist", "Album", "Year", "Genre"]
         for field in fields:
             row = QHBoxLayout()
-            row.setSpacing(8)  # closer key/value
+            row.setSpacing(8)
             key_label = QLabel(f"{field}:")
             key_label.setFont(font_key)
-            # dimmer key
             key_label.setStyleSheet("color: #00CC44;")
             val_label = QLabel("N/A")
             val_label.setFont(font_value)
-            # brighter value (slightly more than the standard matrix green)
             val_label.setStyleSheet("color: #00FF88;")
             self.labels[field.lower()] = val_label
             row.addWidget(key_label)
@@ -114,7 +112,7 @@ class PlayerTab(QWidget):
 
         self.metadata_layout.addStretch()
 
-        # 🔧 IMPORTANT: add the left player panel to the main layout
+        # 🔧 Add left player panel
         self.layout.addLayout(self.player_layout, stretch=3)
 
         # ---------------- RIGHT: QUEUE AREA ----------------
@@ -257,7 +255,8 @@ class PlayerTab(QWidget):
 
             art_path = entry.get("artwork")
             if art_path:
-                full_path = os.path.join(BASE_DIR, art_path)
+                # ✅ artwork paths are stored relative to LOCAL_DIR
+                full_path = os.path.join(LOCAL_DIR, art_path)
                 self.set_album_art(full_path)
             else:
                 self.set_album_art(None)

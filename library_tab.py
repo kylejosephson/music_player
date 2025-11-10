@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget,
     QListWidgetItem, QLabel, QMessageBox, QSpacerItem, QSizePolicy
 )
-from config import BASE_DIR
+from config import ROAMING_DIR, LOCAL_DIR  # ✅ permanent storage system
 
 AUDIO_EXTS = {".mp3", ".ogg", ".wav", ".flac", ".m4a"}
 
@@ -38,12 +38,11 @@ def _make_placeholder_icon(size: QSize) -> QIcon:
     return QIcon(pm)
 
 
-
 def _icon_from_art(path, size: QSize) -> QIcon:
-    """Load album art safely in both dev and bundled EXE modes."""
+    """Load album art safely from permanent cache."""
     if path:
-        # If path is relative, resolve it against BASE_DIR
-        full_path = path if os.path.isabs(path) else os.path.join(BASE_DIR, path)
+        # ✅ Resolve relative art paths inside LOCAL_DIR
+        full_path = path if os.path.isabs(path) else os.path.join(LOCAL_DIR, path)
         if os.path.exists(full_path):
             pm = QPixmap(full_path)
             if not pm.isNull():
@@ -72,16 +71,22 @@ class LibraryTab(QWidget):
         self.add_to_player_queue = add_to_player_queue_callback
         self.add_to_playlist_queue = add_to_playlist_queue_callback
 
-        # --- Use portable path for metadata ---
+        # --- Use permanent location for metadata ---
         if metadata_path is None:
-            self.metadata_path = os.path.join(BASE_DIR, "music_metadata.json")
+            self.metadata_path = os.path.join(ROAMING_DIR, "music_metadata.json")
         else:
             self.metadata_path = metadata_path
 
-        # Ensure metadata file exists
+        # ✅ Ensure permanent directories exist
+        os.makedirs(ROAMING_DIR, exist_ok=True)
+        os.makedirs(LOCAL_DIR, exist_ok=True)
+        os.makedirs(os.path.join(LOCAL_DIR, "cache", "artwork"), exist_ok=True)
+
+        # ✅ Ensure metadata file exists safely
         if not os.path.exists(self.metadata_path):
             with open(self.metadata_path, "w", encoding="utf-8") as f:
                 json.dump({}, f)
+            print(f"🧾 Created new metadata file at {self.metadata_path}")
 
         # Navigation state
         self.level = "artists"
@@ -165,6 +170,8 @@ class LibraryTab(QWidget):
             self.back_btn.setEnabled(False)
             self.header_label.setText("Library — Artists")
             self.populate_artists()
+
+            print(f"✅ Library loaded {len(self.songs)} songs from metadata.")
 
         except Exception as e:
             QMessageBox.critical(self, "Metadata Error", f"Failed to read metadata:\n{e}")

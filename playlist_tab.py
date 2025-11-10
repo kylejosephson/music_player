@@ -3,11 +3,11 @@ import json
 import shutil
 import datetime
 from PyQt5.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QInputDialog,
-    QLabel, QLineEdit, QMessageBox
+    QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QLabel,
+    QLineEdit, QMessageBox
 )
 from PyQt5.QtCore import Qt
-from config import BASE_DIR
+from config import ROAMING_DIR  # ✅ use permanent app data location
 
 
 class PlaylistTab(QWidget):
@@ -15,15 +15,16 @@ class PlaylistTab(QWidget):
         super().__init__()
         self.player_tab = player_tab
 
-        # --- Paths ---
-        self.playlists_file = os.path.join(BASE_DIR, "playlists.json")
-        self.backup_folder = os.path.join(BASE_DIR, "backups")
+        # --- Permanent paths ---
+        self.playlists_file = os.path.join(ROAMING_DIR, "playlists.json")
+        self.backup_folder = os.path.join(ROAMING_DIR, "backups")
         os.makedirs(self.backup_folder, exist_ok=True)
 
         # --- Ensure playlists.json exists ---
         if not os.path.exists(self.playlists_file):
             with open(self.playlists_file, "w", encoding="utf-8") as f:
                 json.dump({}, f)
+            print(f"🧾 Created new playlists file at {self.playlists_file}")
 
         self.playlists = {}
 
@@ -129,7 +130,7 @@ class PlaylistTab(QWidget):
         try:
             with open(self.playlists_file, "w", encoding="utf-8") as f:
                 json.dump(self.playlists, f, indent=4)
-            print(f"💾 Playlists saved to {os.path.basename(self.playlists_file)}")
+            print(f"💾 Playlists saved to {self.playlists_file}")
             self.backup_playlists()
         except Exception as e:
             print(f"⚠️ Error saving playlists: {e}")
@@ -142,8 +143,9 @@ class PlaylistTab(QWidget):
                 backup_name = f"playlists_backup_{ts}.json"
                 backup_path = os.path.join(self.backup_folder, backup_name)
                 shutil.copy2(self.playlists_file, backup_path)
-                print(f"🕒 Backup created: {os.path.basename(backup_path)}")
+                print(f"🕒 Backup created: {backup_path}")
 
+                # Clean old backups
                 backups = sorted(
                     [f for f in os.listdir(self.backup_folder) if f.startswith("playlists_backup_")],
                     key=lambda f: os.path.getmtime(os.path.join(self.backup_folder, f)),
