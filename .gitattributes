@@ -1,0 +1,54 @@
+# ==========================================================
+# 🧩  Kyle's Music Player - Git Attributes
+# ==========================================================
+# Ensures consistent line endings, diff rules, and file handling
+# across Windows, macOS, and Linux environments.
+# ==========================================================
+
+# === Line Endings ===
+# Normalize all text files to LF in the repo, CRLF on Windows
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# === Source Code ===
+*.py text diff=python
+*.qss text
+*.iss text
+*.json text
+*.txt text
+*.md text
+*.yml text
+*.yaml text
+
+# === OS / Binary / Media Files ===
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.bmp binary
+*.wav binary
+*.mp3 binary
+*.flac binary
+*.exe binary
+*.dll binary
+
+# === Project-Specific ===
+*.spec text
+*.log text
+*.cfg text
+
+# === Windows Explorer Artifacts (Prevent Merge Conflicts) ===
+Thumbs.db binary
+ehthumbs.db binary
+Icon? binary
+desktop.ini binary
+
+# ==========================================================
+# ✅ RESULT:
+#   - All Python & text files use LF in repo
+#   - Windows batch and PowerShell scripts stay CRLF
+#   - Images, music, and binaries are stored exactly as-is
+# ==========================================================
