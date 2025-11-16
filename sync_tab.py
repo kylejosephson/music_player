@@ -9,6 +9,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QTimer
 from config import ROAMING_DIR, LOCAL_DIR, ONEDRIVE_DATA_DIR
 
+from safe_print import safe_print
+
 
 class SyncTab(QWidget):
     def __init__(
@@ -113,7 +115,6 @@ class SyncTab(QWidget):
 
     # --------------------------------------------------
     def check_playlist_changes(self):
-        """Detect local playlist edits and refresh instantly."""
         if os.path.exists(self.local_playlist_path):
             modified = os.path.getmtime(self.local_playlist_path)
             if self.last_playlist_timestamp is None or modified != self.last_playlist_timestamp:
@@ -122,7 +123,6 @@ class SyncTab(QWidget):
 
     # --------------------------------------------------
     def refresh_status(self):
-        """Compare local playlists.json and OneDrive backups."""
         import json
         self.status_label.setText("🔍 Scanning...")
         QApplication.processEvents()
@@ -133,7 +133,7 @@ class SyncTab(QWidget):
         local_exists = os.path.exists(self.local_playlist_path)
         latest_backup = self._find_latest_backup(prefix="playlists_backup_")
 
-        # --- PLAYLIST STATUS ---
+        # PLAYLIST STATUS
         if not local_exists and not latest_backup:
             self.playlist_list.addItem("⚠️ No local playlist or backups found.")
         elif local_exists and not latest_backup:
@@ -150,6 +150,7 @@ class SyncTab(QWidget):
                 with open(backup_path, "r", encoding="utf-8") as f:
                     backup_data = json.load(f)
 
+                # Normalize structure
                 if isinstance(local_data, dict) and "playlists" in local_data:
                     local_data = local_data["playlists"]
                 if isinstance(backup_data, dict) and "playlists" in backup_data:
@@ -166,9 +167,9 @@ class SyncTab(QWidget):
                 ]
 
                 total_playlists = len(local_names.union(backup_names))
-                out_of_sync_count = len(missing_in_backup) + len(missing_in_local) + len(changed_playlists)
+                out_of_sync = len(missing_in_backup) + len(missing_in_local) + len(changed_playlists)
 
-                if out_of_sync_count == 0:
+                if out_of_sync == 0:
                     self.playlist_list.addItem(f"✅ All {total_playlists} playlists match latest backup.")
                 else:
                     if missing_in_backup:
@@ -180,11 +181,13 @@ class SyncTab(QWidget):
                     if changed_playlists:
                         for name in sorted(changed_playlists):
                             self.playlist_list.addItem(f"⚠️ Modified → {name}")
-                    self.playlist_list.addItem(f"Total out of sync: {out_of_sync_count} of {total_playlists}")
+
+                    self.playlist_list.addItem(f"Total out of sync: {out_of_sync} of {total_playlists}")
+
             except Exception as e:
                 self.playlist_list.addItem(f"⚠️ Error comparing playlists: {e}")
 
-        # --- SONG STATUS ---
+        # SONG STATUS
         local_songs = self._get_songs(self.music_dir)
         cloud_songs = self._get_songs(self.onedrive_music_dir)
 

@@ -1,5 +1,6 @@
 # library_tab.py — Artist → Album → Song browser with thumbnails
 import os
+import sys
 import json
 from collections import defaultdict
 
@@ -9,7 +10,9 @@ from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget,
     QListWidgetItem, QLabel, QMessageBox, QSpacerItem, QSizePolicy
 )
-from config import ROAMING_DIR, LOCAL_DIR  # ✅ permanent storage system
+from config import ROAMING_DIR, LOCAL_DIR
+
+from safe_print import safe_print
 
 AUDIO_EXTS = {".mp3", ".ogg", ".wav", ".flac", ".m4a"}
 
@@ -32,7 +35,7 @@ def _make_placeholder_icon(size: QSize) -> QIcon:
     pm = QPixmap(w, h)
     pm.fill(QColor(0, 0, 0))
     p = QPainter(pm)
-    p.setPen(QColor(0, 255, 102))  # Matrix green border
+    p.setPen(QColor(0, 255, 102))  # Matrix Green Border
     p.drawRect(0, 0, w - 1, h - 1)
     p.end()
     return QIcon(pm)
@@ -41,7 +44,6 @@ def _make_placeholder_icon(size: QSize) -> QIcon:
 def _icon_from_art(path, size: QSize) -> QIcon:
     """Load album art safely from permanent cache."""
     if path:
-        # ✅ Resolve relative art paths inside LOCAL_DIR
         full_path = path if os.path.isabs(path) else os.path.join(LOCAL_DIR, path)
         if os.path.exists(full_path):
             pm = QPixmap(full_path)
@@ -53,14 +55,15 @@ def _icon_from_art(path, size: QSize) -> QIcon:
 class LibraryTab(QWidget):
     """
     Three-level browser:
-      Level 'artists' -> list of artists (with a sample album art thumb)
-      Level 'albums'  -> albums for selected artist (album art)
-      Level 'songs'   -> tracks for selected album (album art)
-    Double-click on song adds to both Player queue and Playlist builder.
+      Level 'artists' -> list of artists
+      Level 'albums'  -> albums for artist
+      Level 'songs'   -> tracks for album
+    Double-click on song adds it to Player queue + Playlist builder.
     """
+
     def __init__(
         self,
-        root_folder,  # kept for compatibility
+        root_folder,
         add_to_player_queue_callback,
         add_to_playlist_queue_callback,
         metadata_path=None
@@ -71,24 +74,24 @@ class LibraryTab(QWidget):
         self.add_to_player_queue = add_to_player_queue_callback
         self.add_to_playlist_queue = add_to_playlist_queue_callback
 
-        # --- Use permanent location for metadata ---
+        # metadata path
         if metadata_path is None:
             self.metadata_path = os.path.join(ROAMING_DIR, "music_metadata.json")
         else:
             self.metadata_path = metadata_path
 
-        # ✅ Ensure permanent directories exist
+        # ensure dirs exist
         os.makedirs(ROAMING_DIR, exist_ok=True)
         os.makedirs(LOCAL_DIR, exist_ok=True)
         os.makedirs(os.path.join(LOCAL_DIR, "cache", "artwork"), exist_ok=True)
 
-        # ✅ Ensure metadata file exists safely
+        # ensure metadata file exists
         if not os.path.exists(self.metadata_path):
             with open(self.metadata_path, "w", encoding="utf-8") as f:
                 json.dump({}, f)
-            print(f"🧾 Created new metadata file at {self.metadata_path}")
+            safe_print(f"Created new metadata file at {self.metadata_path}")  # ✅
 
-        # Navigation state
+        # navigation state
         self.level = "artists"
         self.current_artist = None
         self.current_album = None
@@ -105,6 +108,7 @@ class LibraryTab(QWidget):
         root.setSpacing(8)
 
         header_row = QHBoxLayout()
+
         self.back_btn = QPushButton("⟵ Back")
         self.back_btn.setFixedHeight(32)
         self.back_btn.clicked.connect(self.on_back_clicked)
@@ -112,14 +116,16 @@ class LibraryTab(QWidget):
         header_row.addWidget(self.back_btn, 0, Qt.AlignLeft)
 
         header_row.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.Expanding, QSizePolicy.Minimum))
+
         self.header_label = QLabel("Library — Artists")
         self.header_label.setAlignment(Qt.AlignCenter)
         header_row.addWidget(self.header_label, 0, Qt.AlignCenter)
+
         header_row.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
-        self.reload_btn = QPushButton("Reload")
+        self.reload_btn = QPushButton("Reload Library")
         self.reload_btn.setFixedHeight(32)
-        self.reload_btn.clicked.connect(self.reload_metadata)
+        self.reload_btn.clicked.connect(self.rescan_and_reload)
         header_row.addWidget(self.reload_btn, 0, Qt.AlignRight)
 
         root.addLayout(header_row)
@@ -129,15 +135,11 @@ class LibraryTab(QWidget):
         self.list.itemDoubleClicked.connect(self.on_item_double_clicked)
         root.addWidget(self.list)
 
-        # Load metadata and populate artists
         self.reload_metadata()
 
-    # ---------- Data loading & indexing ----------
+    # ---------- Data loading ----------
     def reload_metadata(self):
         try:
-            if not os.path.exists(self.metadata_path):
-                raise FileNotFoundError(f"Metadata file not found:\n{self.metadata_path}")
-
             with open(self.metadata_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
@@ -171,12 +173,12 @@ class LibraryTab(QWidget):
             self.header_label.setText("Library — Artists")
             self.populate_artists()
 
-            print(f"✅ Library loaded {len(self.songs)} songs from metadata.")
+            safe_print(f"Library loaded {len(self.songs)} songs from metadata.")  # ✅
 
         except Exception as e:
             QMessageBox.critical(self, "Metadata Error", f"Failed to read metadata:\n{e}")
 
-    # ---------- Populate views ----------
+    # ---------- List population ----------
     def populate_artists(self):
         self.list.clear()
         for artist in sorted(self.by_artist.keys(), key=str.lower):
@@ -215,20 +217,21 @@ class LibraryTab(QWidget):
             item.setData(Qt.UserRole, {"type": "song", "artist": artist, "album": album, "song": s})
             self.list.addItem(item)
 
-    # ---------- Interactions ----------
+    # ---------- Navigation ----------
     def on_back_clicked(self):
         if self.level == "songs":
             self.level = "albums"
             self.header_label.setText(f"{self.current_artist} — Albums")
             self.populate_albums(self.current_artist)
             self.current_album = None
+
         elif self.level == "albums":
             self.level = "artists"
             self.header_label.setText("Library — Artists")
             self.populate_artists()
             self.back_btn.setEnabled(False)
 
-    def on_item_double_clicked(self, item: QListWidgetItem):
+    def on_item_double_clicked(self, item):
         payload = item.data(Qt.UserRole) or {}
         typ = payload.get("type")
 
@@ -255,3 +258,33 @@ class LibraryTab(QWidget):
                 return
             self.add_to_player_queue(path)
             self.add_to_playlist_queue(path)
+
+    # ---------- Rescan ----------
+    def rescan_and_reload(self):
+        try:
+            # Import rebuild function from bundled module
+            from tag_extractor import rebuild_music_metadata
+
+            # Perform metadata rebuild
+            result = rebuild_music_metadata()
+
+            safe_print(
+                f"Metadata rebuilt! Total={result['total']}, "
+                f"New={result['new']}, Removed={result['removed']}"
+            )
+
+            # Reload library from metadata file
+            self.reload_metadata()
+
+            QMessageBox.information(
+                self,
+                "Reload Complete",
+                "Library successfully rescanned and reloaded!"
+            )
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Reload Error",
+                f"Failed to rebuild library:\n{e}"
+            )
