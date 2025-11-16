@@ -1,35 +1,36 @@
-; ------------------------------------------------------------
-; 🧩 Kyle's Music Player Installer Script
-; ------------------------------------------------------------
-; This Inno Setup script packages your compiled EXE into a
-; professional Windows installer with shortcuts and uninstall support.
-; ------------------------------------------------------------
-
 [Setup]
-AppName=Kyle's Music Player
-AppVersion=1.0.0
-DefaultDirName={autopf}\Kyle's Music Player
-DefaultGroupName=Kyle's Music Player
-UninstallDisplayIcon={app}\Kyles_Music_Player.exe
-OutputDir=C:\Dev\Music_Player_Folder\installer
-OutputBaseFilename=KylesMusicPlayerSetup
-Compression=lzma
-SolidCompression=yes
-SetupIconFile=icon.ico
-
-; (Optional) Require admin rights if you want it to install under Program Files
+AppName=Kyles Music Player
+AppVersion=1.0
+DefaultDirName={commonpf32}\KylesMusicPlayer
+DefaultGroupName=Kyles Music Player
+OutputBaseFilename=KylesMusicPlayer_Installer
 PrivilegesRequired=admin
+Compression=lzma2
+SolidCompression=yes
+
+; Modern architecture identifiers (fixes your warning)
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
+
+DisableProgramGroupPage=yes
+
+; Uninstaller metadata
+UninstallDisplayIcon={app}\KylesMusicPlayer.exe
+UninstallDisplayName=Kyles Music Player
 
 [Files]
-Source: "C:\Dev\Music_Player_Folder\dist\Kyles_Music_Player.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Dev\Music_Player_Folder\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\KylesMusicPlayer.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{autoprograms}\Kyle's Music Player"; Filename: "{app}\Kyles_Music_Player.exe"; IconFilename: "{app}\icon.ico"
-Name: "{userdesktop}\Kyle's Music Player"; Filename: "{app}\Kyles_Music_Player.exe"; IconFilename: "{app}\icon.ico"
+; Start Menu icon
+Name: "{group}\Kyles Music Player"; Filename: "{app}\KylesMusicPlayer.exe"; IconFilename: "{app}\icon.ico"
 
-[UninstallDelete]
-Type: filesandordirs; Name: "{app}"
+; Desktop icon (created only if user checks the box)
+Name: "{commondesktop}\Kyles Music Player"; Filename: "{app}\KylesMusicPlayer.exe"; IconFilename: "{app}\icon.ico"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\Kyles_Music_Player.exe"; Description: "Launch Kyle's Music Player"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\KylesMusicPlayer.exe"; Description: "Launch Kyles Music Player"; Flags: nowait postinstall skipifsilent
+
+[Tasks]
+Name: "desktopicon"; Description: "Create Desktop Shortcut"; GroupDescription: "Additional Tasks:"

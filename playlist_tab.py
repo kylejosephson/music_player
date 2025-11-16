@@ -7,7 +7,9 @@ from PyQt5.QtWidgets import (
     QLineEdit, QMessageBox
 )
 from PyQt5.QtCore import Qt
-from config import ROAMING_DIR  # ✅ use permanent app data location
+from config import ROAMING_DIR
+
+from safe_print import safe_print
 
 
 class PlaylistTab(QWidget):
@@ -24,7 +26,7 @@ class PlaylistTab(QWidget):
         if not os.path.exists(self.playlists_file):
             with open(self.playlists_file, "w", encoding="utf-8") as f:
                 json.dump({}, f)
-            print(f"🧾 Created new playlists file at {self.playlists_file}")
+            safe_print(f"Created new playlists file at {self.playlists_file}")
 
         self.playlists = {}
 
@@ -51,12 +53,12 @@ class PlaylistTab(QWidget):
         spacer.setFixedHeight(8)
         root.addWidget(spacer)
 
-        # Main two-column area
+        # Main area
         columns = QHBoxLayout()
         columns.setAlignment(Qt.AlignTop)
         root.addLayout(columns)
 
-        # LEFT: Saved Playlists + Delete button
+        # LEFT: Saved Playlists + Delete
         left_col = QVBoxLayout()
         left_col.setAlignment(Qt.AlignTop)
         columns.addLayout(left_col, stretch=1)
@@ -81,7 +83,6 @@ class PlaylistTab(QWidget):
         self.playlist_queue_list = QListWidget()
         right_col.addWidget(self.playlist_queue_list)
 
-        # --- Save + Clear Buttons Row ---
         button_row = QHBoxLayout()
         button_row.setAlignment(Qt.AlignLeft)
 
@@ -95,7 +96,7 @@ class PlaylistTab(QWidget):
 
         right_col.addLayout(button_row)
 
-        # Internal builder queue
+        # Internal builder
         self.playlist_queue = []
 
         # Load existing playlists
@@ -106,7 +107,7 @@ class PlaylistTab(QWidget):
         if path and path not in self.playlist_queue:
             self.playlist_queue.append(path)
             self.playlist_queue_list.addItem(os.path.basename(path))
-            print(f"🧱 [Playlist Builder] Added: {os.path.basename(path)}")
+            safe_print(f"[Playlist Builder] Added: {os.path.basename(path)}")  # ✅ fixed
 
     # ------------------------------------------------------------------
     # Save / Load / Backup
@@ -116,13 +117,14 @@ class PlaylistTab(QWidget):
             try:
                 with open(self.playlists_file, "r", encoding="utf-8") as f:
                     self.playlists = json.load(f)
-                print(f"✅ Loaded playlists from {os.path.basename(self.playlists_file)}")
+                safe_print(f"Loaded playlists from {os.path.basename(self.playlists_file)}")  # ✅
             except Exception as e:
-                print(f"⚠️ Error loading playlists: {e}")
+                safe_print(f"Error loading playlists: {e}")  # ✅
                 self.playlists = {}
         else:
             self.playlists = {}
-            print("ℹ️ No playlists file found; starting fresh.")
+            safe_print("No playlists file found; starting fresh.")  # ✅
+
         self.refresh_saved_list()
 
     def save_playlists(self):
@@ -130,10 +132,11 @@ class PlaylistTab(QWidget):
         try:
             with open(self.playlists_file, "w", encoding="utf-8") as f:
                 json.dump(self.playlists, f, indent=4)
-            print(f"💾 Playlists saved to {self.playlists_file}")
+
+            safe_print(f"Playlists saved to {self.playlists_file}")  # ✅
             self.backup_playlists()
         except Exception as e:
-            print(f"⚠️ Error saving playlists: {e}")
+            safe_print(f"Error saving playlists: {e}")  # ✅
 
     def backup_playlists(self):
         """Create a timestamped backup (keep latest 50)."""
@@ -143,9 +146,10 @@ class PlaylistTab(QWidget):
                 backup_name = f"playlists_backup_{ts}.json"
                 backup_path = os.path.join(self.backup_folder, backup_name)
                 shutil.copy2(self.playlists_file, backup_path)
-                print(f"🕒 Backup created: {backup_path}")
 
-                # Clean old backups
+                safe_print(f"Backup created: {backup_path}")  # ✅
+
+                # Cleanup backups
                 backups = sorted(
                     [f for f in os.listdir(self.backup_folder) if f.startswith("playlists_backup_")],
                     key=lambda f: os.path.getmtime(os.path.join(self.backup_folder, f)),
@@ -154,11 +158,11 @@ class PlaylistTab(QWidget):
                 for old in backups[50:]:
                     try:
                         os.remove(os.path.join(self.backup_folder, old))
-                        print(f"🧹 Removed old backup: {old}")
+                        safe_print(f"Removed old backup: {old}")  # ✅
                     except Exception as e:
-                        print(f"⚠️ Error removing old backup {old}: {e}")
+                        safe_print(f"Error removing old backup {old}: {e}")  # ✅
         except Exception as e:
-            print(f"⚠️ Error creating backup: {e}")
+            safe_print(f"Error creating backup: {e}")  # ✅
 
     def refresh_saved_list(self):
         self.saved_list.clear()
@@ -202,6 +206,7 @@ class PlaylistTab(QWidget):
             self._info("⚠️ No playlist selected.")
             return
         name = item.text()
+
         reply = QMessageBox.question(
             self,
             "Confirm Delete",
@@ -225,9 +230,11 @@ class PlaylistTab(QWidget):
             self.player_tab.queue_list.clear()
             for song in songs:
                 self.player_tab.queue_list.addItem(os.path.basename(song))
+
             self.player_tab.current_index = -1
             self.player_tab.is_paused = False
-            print(f"🎵 Playlist '{name}' loaded into PLAYER queue.")
+
+            safe_print(f"Playlist '{name}' loaded into PLAYER queue.")  # ✅
             self._info(f"🎵 Playlist '{name}' loaded into Player queue.")
         else:
             self._info(f"⚠️ Playlist '{name}' is empty.")

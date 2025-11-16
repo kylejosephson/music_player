@@ -1,14 +1,19 @@
 import os
+os.environ["SDL_AUDIODRIVER"] = "directsound"
+
 import json
 import pygame
 from mutagen.mp3 import MP3
+
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QLabel, QProgressBar,
     QGraphicsDropShadowEffect, QFrame
 )
 from PyQt5.QtCore import QTimer, Qt, QEvent, QTime
 from PyQt5.QtGui import QFont, QPixmap, QColor
-from config import ROAMING_DIR, LOCAL_DIR  # ✅ use permanent folders
+
+from config import ROAMING_DIR, LOCAL_DIR
+from safe_print import safe_print
 
 
 class PlayerTab(QWidget):
@@ -16,7 +21,7 @@ class PlayerTab(QWidget):
         super().__init__()
         pygame.mixer.init()
 
-        # -------- Load metadata (for album art + tags) --------
+        # -------- Load metadata --------
         self.metadata_path = os.path.join(ROAMING_DIR, "music_metadata.json")
         self.metadata = self.load_metadata()
 
@@ -149,7 +154,7 @@ class PlayerTab(QWidget):
         self.last_update_time = QTime.currentTime()
         self.playback_finished = False
 
-        # --- Timer for progress ---
+        # --- Timer ---
         self.timer = QTimer()
         self.timer.setInterval(100)
         self.timer.timeout.connect(self.update_progress)
@@ -159,7 +164,6 @@ class PlayerTab(QWidget):
 
     # -------------------------------------------------------------
     def load_metadata(self):
-        """Load music_metadata.json into memory."""
         try:
             with open(self.metadata_path, "r", encoding="utf-8") as f:
                 return json.load(f)
@@ -167,7 +171,6 @@ class PlayerTab(QWidget):
             return {}
 
     def set_album_art(self, artwork_path):
-        """Set album art image or default."""
         if artwork_path and os.path.exists(artwork_path):
             pixmap = QPixmap(artwork_path).scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         else:
@@ -180,7 +183,7 @@ class PlayerTab(QWidget):
         if path and path not in self.queue:
             self.queue.append(path)
             self.queue_list.addItem(os.path.basename(path))
-            print(f"🎶 Added to queue: {os.path.basename(path)}")
+            safe_print(f"Added to queue: {os.path.basename(path)}")  # ✅ fixed
 
     def clear_queue(self):
         pygame.mixer.music.stop()
@@ -221,7 +224,7 @@ class PlayerTab(QWidget):
                 pygame.mixer.music.play()
             except Exception as e:
                 self.song_label.setText(f"⚠️ Error playing: {os.path.basename(song_path)}")
-                print(f"⚠️ {e}")
+                safe_print(f"Error playing file: {e}")  # ✅ fixed
                 return
 
             self.current_index = index
@@ -240,11 +243,10 @@ class PlayerTab(QWidget):
                 self.total_length = 0
             self.time_label.setText(f"0:00 / {self.format_time(self.total_length)}")
 
-            # --- Update Metadata + Art ---
+            # --- Metadata ---
             self.update_metadata_display(song_path)
 
     def update_metadata_display(self, song_path):
-        """Display metadata and album art from JSON."""
         entry = self.metadata.get(song_path)
         if entry:
             self.labels["title"].setText(entry.get("title", "N/A"))
@@ -255,7 +257,6 @@ class PlayerTab(QWidget):
 
             art_path = entry.get("artwork")
             if art_path:
-                # ✅ artwork paths are stored relative to LOCAL_DIR
                 full_path = os.path.join(LOCAL_DIR, art_path)
                 self.set_album_art(full_path)
             else:
@@ -295,6 +296,7 @@ class PlayerTab(QWidget):
     def update_progress(self):
         if self.total_length <= 0 or self.playback_finished:
             return
+
         pos_ms = pygame.mixer.music.get_pos()
         elapsed_ms = self.last_update_time.msecsTo(QTime.currentTime())
         self.last_update_time = QTime.currentTime()
